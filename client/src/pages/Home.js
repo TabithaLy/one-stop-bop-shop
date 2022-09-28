@@ -9,6 +9,7 @@ const Home = () => {
       {/* <CategoryMenu />
       <ProductList />
       <Cart /> */}
+      <h1>Home</h1>
     </div>
   );
 };
