@@ -9,10 +9,10 @@ const orderSchema = new Schema({
     default: Date.now
   },
   // Order can contain one or more products
-  products: [
+  vinyl: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Product'
+      ref: 'Vinyl'
     }
   ]
 });
