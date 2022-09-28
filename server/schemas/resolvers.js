@@ -5,14 +5,14 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-    // categories: async () => {
-    //   return await Category.find();
+    // genre: async () => {
+    //   return await Genre.find();
     // },
-    // products: async (parent, { category, name }) => {
+    // vinyls: async (parent, { genre, name }) => {
     //   const params = {};
 
-    //   if (category) {
-    //     params.category = category;
+    //   if (genre) {
+    //     params.genre = genre;
     //   }
 
     //   if (name) {
@@ -21,16 +21,16 @@ const resolvers = {
     //     };
     //   }
 
-    //   return await Product.find(params).populate('category');
+    //   return await Vinyl.find(params).populate('genre');
     // },
-    // product: async (parent, { _id }) => {
-    //   return await Product.findById(_id).populate('category');
+    // vinyl: async (parent, { _id }) => {
+    //   return await Vinyl.findById(_id).populate('genre');
     // },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
+          path: 'orders.vinyls',
+          populate: 'genre'
         });
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
@@ -43,8 +43,8 @@ const resolvers = {
     // order: async (parent, { _id }, context) => {
     //   if (context.user) {
     //     const user = await User.findById(context.user._id).populate({
-    //       path: 'orders.products',
-    //       populate: 'category'
+    //       path: 'orders.vinyls',
+    //       populate: 'genre'
     //     });
 
     //     return user.orders.id(_id);
@@ -54,21 +54,21 @@ const resolvers = {
     // },
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;
-    //   const order = new Order({ products: args.products });
+    //   const order = new Order({ vinyls: args.vinyls });
     //   const line_items = [];
 
-    //   const { products } = await order.populate('products');
+    //   const { vinyls } = await order.populate('vinyls');
 
-    //   for (let i = 0; i < products.length; i++) {
-    //     const product = await stripe.products.create({
-    //       name: products[i].name,
-    //       description: products[i].description,
-    //       images: [`${url}/images/${products[i].image}`]
+    //   for (let i = 0; i < vinyls.length; i++) {
+    //     const vinyl = await stripe.vinyls.create({
+    //       name: vinyls[i].name,
+    //       description: vinyls[i].description,
+    //       images: [`${url}/images/${vinyls[i].image}`]
     //     });
 
     //     const price = await stripe.prices.create({
-    //       product: product.id,
-    //       unit_amount: products[i].price * 100,
+    //       vinyl: vinyl.id,
+    //       unit_amount: vinyls[i].price * 100,
     //       currency: 'usd',
     //     });
 
@@ -96,10 +96,10 @@ const resolvers = {
 
   //     return { token, user };
   //   },
-  //   addOrder: async (parent, { products }, context) => {
+  //   addOrder: async (parent, { vinyls }, context) => {
   //     console.log(context);
   //     if (context.user) {
-  //       const order = new Order({ products });
+  //       const order = new Order({ vinyls });
 
   //       await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
@@ -115,10 +115,10 @@ const resolvers = {
 
   //     throw new AuthenticationError('Not logged in');
   //   },
-  //   updateProduct: async (parent, { _id, quantity }) => {
+  //   updateVinyl: async (parent, { _id, quantity }) => {
   //     const decrement = Math.abs(quantity) * -1;
 
-  //     return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+  //     return await Vinyl.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
   //   },
   //   login: async (parent, { email, password }) => {
   //     const user = await User.findOne({ email });
