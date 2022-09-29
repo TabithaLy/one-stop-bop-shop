@@ -1,10 +1,10 @@
 const db = require("./connection");
-const { User, Product, Category } = require("../models");
+const { User, Vinyl, Genre } = require("../models");
 
 db.once("open", async () => {
-  await Category.deleteMany();
+  await Genre.deleteMany();
 
-  const categories = await Category.insertMany([
+  const genre = await Genre.insertMany([
     { name: "R&B" },
     { name: "Rock" },
     { name: "Jazz" },
@@ -12,11 +12,11 @@ db.once("open", async () => {
     { name: "Pop" },
   ]);
 
-  console.log("Categories successfully seeded");
+  console.log("Genres successfully seeded");
 
-  await Product.deleteMany();
+  await Vinyl.deleteMany();
 
-  const products = await Product.insertMany([
+  const vinyl = await Vinyl.insertMany([
     {
       title: "Channel Orange",
       artist: "Frank Ocean",
@@ -24,7 +24,7 @@ db.once("open", async () => {
       image: "channel-orange.png",
       price: 24.99,
       quantity: 500,
-      category: categories[4]._id,
+      genre: genre[4]._id,
     },
     {
       title: "Blond",
@@ -33,7 +33,7 @@ db.once("open", async () => {
       image: "blond.png",
       price: 29.99,
       quantity: 500,
-      category: categories[4]._id,
+      genre: genre[4]._id,
     },
     {
       title: "Nostalgia Ultra",
@@ -42,11 +42,11 @@ db.once("open", async () => {
       image: "nostalgia-ultra.png",
       price: 2.99,
       quantity: 500,
-      category: categories[4]._id,
+      genre: genre[4]._id,
     },
   ]);
 
-  console.log("products seeded");
+  console.log("Vinyls seeded");
 
   await User.deleteMany();
 
@@ -57,7 +57,7 @@ db.once("open", async () => {
     password: "passwordtest1",
     orders: [
       {
-        products: [products[0]._id, products[0]._id, products[1]._id],
+        vinyl: [vinyl[0]._id, vinyl[0]._id, vinyl[1]._id],
       },
     ],
   });

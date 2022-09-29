@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const productSchema = new Schema({
+const vinylSchema = new Schema({
     // Album title
   title: {
     type: String,
@@ -36,13 +36,13 @@ const productSchema = new Schema({
     default: 0
   },
   // The genre of the album
-  category: {
+  genre: {
     type: Schema.Types.ObjectId,
-    ref: 'Category',
+    ref: 'Genre',
     required: true
   }
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Vinyl = mongoose.model('Vinyl', vinylSchema);
 
-module.exports = Product;
+module.exports = Vinyl;
