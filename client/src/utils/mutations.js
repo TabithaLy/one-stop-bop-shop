@@ -11,17 +11,19 @@ export const LOGIN = gql`
   }
 `;
 
+
+
 export const ADD_ORDER = gql`
-  mutation addOrder($products: [ID]!) {
-    addOrder(products: $products) {
+  mutation addOrder($vinyls: [ID]!) {
+    addOrder(vinyls: $vinyls) {
       purchaseDate
-      products {
+      vinyls {
         _id
-        name
-        description
+        title
+        artist
         price
         quantity
-        category {
+        genres {
           name
         }
       }
