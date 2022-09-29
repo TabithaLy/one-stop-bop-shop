@@ -33,14 +33,13 @@ const vinylSchema = new Schema({
   quantity: {
     type: Number,
     min: 0,
-    default: 0
+    default: 100
   },
-  // The genre of the album
-  genre: {
+  // The genre(s) of the album
+  genres: [{
     type: Schema.Types.ObjectId,
-    ref: 'Genre',
-    required: true
-  }
+    ref: 'Genre'
+  }]
 });
 
 const Vinyl = mongoose.model('Vinyl', vinylSchema);
