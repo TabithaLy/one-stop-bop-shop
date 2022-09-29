@@ -18,7 +18,7 @@ import Auth from "../../utils/auth";
 //   );
 // }
 
-export default function NavTabs() {
+export default function Nav() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
