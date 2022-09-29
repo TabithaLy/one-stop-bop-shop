@@ -1,36 +1,36 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Genre, Order, Vinyl } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-    // genre: async () => {
-    //   return await Genre.find();
-    // },
-    // vinyls: async (parent, { genre, name }) => {
-    //   const params = {};
+    genre: async () => {
+      return await Genre.find();
+    },
+    vinyls: async (parent, { genre, name }) => {
+      const params = {};
 
-    //   if (genre) {
-    //     params.genre = genre;
-    //   }
+      if (genre) {
+        params.genre = genre;
+      }
 
-    //   if (name) {
-    //     params.name = {
-    //       $regex: name
-    //     };
-    //   }
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
 
-    //   return await Vinyl.find(params).populate('genre');
-    // },
-    // vinyl: async (parent, { _id }) => {
-    //   return await Vinyl.findById(_id).populate('genre');
-    // },
+      return await Vinyl.find(params).populate('genre');
+    },
+    vinyl: async (parent, { _id }) => {
+      return await Vinyl.findById(_id).populate('genre');
+    },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.vinyls',
-          populate: 'genre'
+          populate: 'genres'
         });
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
