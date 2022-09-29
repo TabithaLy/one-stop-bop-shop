@@ -1,90 +1,36 @@
 import React from "react";
-import useUIContext from "../../hooks/useUIContext";
-import { useQuery } from "@apollo/client";
+// import { Container, Row, Col, Button, Card } from "@mui/material";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-
-export default function Cart() {
-  const { cartOpen, setCartOpen, showCart } = useUIContext();
-const theme = useTheme();
-const matches = useMediaQuery(theme.breakpoints.down("md"));
-  const { loading, data } = useQuery(QUERY_PRODUCTS); // QUERY_PRODUCTS is a GraphQL query that will be defined in the next section
-  const products = data?.products || [];
-  const [state, dispatch] = useStoreContext();
-  const { cart } = state;
-
-  const toggleCart = () => {
-    setCartOpen(!cartOpen);
-  };
-
-  const calculateTotal = () => {
-    let sum = 0;
-    cart.forEach((item) => {
-      sum += item.purchasePrice * item.purchaseQuantity;
-    });
-    return sum.toFixed(2);
-  };
-
-
+export default function MediaCard() {
   return (
-    <div className="cart">
-      <div className="close" onClick={toggleCart}>
-        [close]
-      </div>
-      <h2>Shopping Cart</h2>
-      {cart.length ? (
-        <div>
-          {cart.map((item) => (
-            <div key={item._id} className="flex-row space-between">
-              <div>
-                <img
-                  alt={item.name}
-                  src={`/images/${item.image}`}
-                />
-                {item.name} x {item.purchaseQuantity}
-              </div>
-              <div>${item.purchasePrice * item.purchaseQuantity}</div>
-            </div>
-          ))}
-          <div className="flex-row space-between">
-            <strong>Total:</strong>
-            <strong>${calculateTotal()}</strong>
-          </div>
-          <div className="flex-row flex-end">
-            <button onClick={submitCheckout}>
-              Checkout
-            </button>
-          </div>
-        </div>
-      ) : (
-        <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
-          You haven't added anything to your cart yet!
-        </h3>
-      )}
-    </div>
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        height="140"
+        image="/static/images/cards/contemplative-reptile.jpg"
+        alt="green iguana"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Lizard
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Lizards are a widespread group of squamate reptiles, with over 6,000
+          species, ranging across all continents except Antarctica
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Share</Button>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
   );
 }
-
-// Language: javascript
-
-//   return (
-//     <Drawer 
-//     open ={true}
-//     anchor="right"
-//     PaperProps={{
-//         sx: (
-//             width: 500,
-//             backgroundColor: "primary.main",
-//             color: Color.white,
-
-//             border: "none",
-//             overflow: "hidden",
-
-//             color: "primary_dark",
-//         )
-//     }}
-//    
 
 
