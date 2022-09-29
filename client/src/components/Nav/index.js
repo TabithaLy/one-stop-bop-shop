@@ -1,59 +1,46 @@
 // import React, { useState, useEffect } from 'react';
-import React from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import Auth from "../../utils/auth";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
-function Nav() {
+// function LinkTab(props) {
+//   return (
+    
+//     <Link component="a" to={props.href}> 
+//     <Tab>
 
-  function showNavigation() {
-    if (Auth.loggedIn()) {
-      return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/orderHistory">
-              Order History
-            </Link>
-          </li>
-          <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
-          </li>
-        </ul>
-      );
-    } else {
-      return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/signup">
-              Signup
-            </Link>
-          </li>
-          <li className="mx-1">
-            <Link to="/login">
-              Login
-            </Link>
-          </li>
-        </ul>
-      );
-    }
-  }
+//     {props.label}
+//     </Tab>
+//     </Link>
+//   );
+// }
 
+export default function NavTabs() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  if (Auth.loggedIn()) {
   return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          -Shop-Shop
-        </Link>
-      </h1>
-
-      <nav>
-        {showNavigation()}
-      </nav>
-    </header>
+    <Box sx={{ width: '100%' }}>
+      <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
+        <Tab label="Signup" href="/products" />
+        <Tab label="Login" href="/logout" />
+      </Tabs>
+    </Box>
   );
+  } else {
+    return (
+      <Box sx={{ width: '100%' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
+          <Tab label="Signup" href="/signup" />
+          <Tab label="Login" href="/login" />
+        </Tabs>
+      </Box>
+    );
+  }
 }
-
-export default Nav;
