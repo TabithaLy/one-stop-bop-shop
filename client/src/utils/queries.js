@@ -1,21 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_PRODUCTS = gql`
-  query getProducts($category: ID) {
-    products(category: $category) {
-      _id
-      name
-      description
-      price
-      quantity
-      image
-      category {
-        _id
-      }
-    }
-  }
-`;
-
 export const QUERY_CHECKOUT = gql`
   query getCheckout($vinyls: [ID]!) {
     checkout(vinyls: $vinyls) {
@@ -46,6 +30,7 @@ export const QUERY_USER = gql`
             title
             artist
             price
+            image
             quantity
             genres {
                 name
@@ -63,6 +48,7 @@ export const QUERY_VINYLS = gql`
         title
         artist
         price
+        image
         quantity
         genres {
             name
@@ -78,6 +64,7 @@ export const QUERY_VINYLS_BY_SEARCH = gql`
             title
             artist
             price
+            image
             quantity
             genres {
                 name
@@ -92,6 +79,7 @@ export const QUERY_ALL_VINYLS = gql`
         title
         artist
         price
+        image
         quantity
         genres {
             name
