@@ -49,7 +49,7 @@ function App() {
             <Routes>
               <Route 
                 path="/" 
-                element={<Home />} 
+                element={<Vinyls />} 
               />
               <Route 
                 path="/login" 
