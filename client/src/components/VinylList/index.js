@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import VinylItem from '../VinylItem';
-import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_VINYLS } from '../../utils/actions';
-import { useQuery } from '@apollo/client';
-import { QUERY_VINYLS } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
+import React, { useEffect } from "react";
+import VinylItem from "../VinylItem";
+import { useStoreContext } from "../../utils/GlobalState";
+import { UPDATE_VINYLS } from "../../utils/actions";
+import { useQuery } from "@apollo/client";
+import { QUERY_VINYLS } from "../../utils/queries";
+import { idbPromise } from "../../utils/helpers";
+import { Box, Grid } from "@mui/material";
 
 function VinylList() {
   const [state, dispatch] = useStoreContext();
@@ -20,10 +21,10 @@ function VinylList() {
         vinyls: data.vinyls,
       });
       data.vinyls.forEach((vinyl) => {
-        idbPromise('vinyls', 'put', vinyl);
+        idbPromise("vinyls", "put", vinyl);
       });
     } else if (!loading) {
-      idbPromise('vinyls', 'get').then((vinyls) => {
+      idbPromise("vinyls", "get").then((vinyls) => {
         dispatch({
           type: UPDATE_VINYLS,
           vinyls: vinyls,
@@ -37,33 +38,56 @@ function VinylList() {
       return state.vinyls;
     }
 
-    return state.vinyls.filter(
-      (vinyl) => vinyl.genre._id === currentGenre
-    );
+    return state.vinyls.filter((vinyl) => vinyl.genre._id === currentGenre);
   }
 
+  // return (
+  //   <div className="my-2">
+  //     <h2>Our Vinyls:</h2>
+  //     {state.vinyls.length ? (
+  //       <div className="flex-row">
+  //         {filterVinyls().map((vinyl) => (
+  //           <VinylItem
+  //             key={vinyl._id}
+  //             _id={vinyl._id}
+  //             image={vinyl.image}
+  //             title={vinyl.title}
+  //             artist={vinyl.artist}
+  //             price={vinyl.price}
+  //             quantity={vinyl.quantity}
+  //           />
+  //         ))}
+  //       </div>
+  //     ) : (
+  //       <h3>
+  //         Nothing to display. Please contact us to request specific products!{" "}
+  //       </h3>
+  //     )}
+  //   </div>
+  // );
+
+  
   return (
-    <div className="my-2">
-      <h2>Our Vinyls:</h2>
-      {state.vinyls.length ? (
-        <div className="flex-row">
-          {filterVinyls().map((vinyl) => (
-            <VinylItem
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={{ xs:2, md:1 }} columns={{ xs: 4, sm: 8, md: 12}}>
+        {filterVinyls().map((vinyl) => (
+          <Grid item xs={2} sm={4} md={4}>
+            <VinylItem 
               key={vinyl._id}
               _id={vinyl._id}
               image={vinyl.image}
               title={vinyl.title}
-              artist = {vinyl.artist}
+              artist={vinyl.artist}
               price={vinyl.price}
               quantity={vinyl.quantity}
             />
-          ))}
-        </div>
-      ) : (
-        <h3>Nothing to display. Please contact us to request specific products! </h3>
-      )}
-    </div>
-  );
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  )
+
+
 }
 
 export default VinylList;
