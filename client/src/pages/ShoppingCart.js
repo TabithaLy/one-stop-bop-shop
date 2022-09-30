@@ -2,116 +2,116 @@
 // import { Link, useParams } from 'react-router-dom';
 // import { useQuery } from '@apollo/client';
 
-// import Cart from '../components/Cart';
-// import { useStoreContext } from '../utils/GlobalState';
-// import {
-//   REMOVE_FROM_CART,
-//   UPDATE_CART_QUANTITY,
-//   ADD_TO_CART,
-//   UPDATE_PRODUCTS,
-// } from '../utils/actions';
-// import { QUERY_PRODUCTS } from '../utils/queries';
-// import { idbPromise } from '../utils/helpers';
-// // import spinner from '../assets/spinner.gif';
+import Cart from '../components/Cart';
+import { useStoreContext } from '../utils/GlobalState';
+import {
+  REMOVE_FROM_CART,
+  UPDATE_CART_QUANTITY,
+  ADD_TO_CART,
+  UPDATE_VINYLS,
+} from '../utils/actions';
+import { QUERY_VINYLS } from '../utils/queries';
+import { idbPromise } from '../utils/helpers';
+// import spinner from '../assets/spinner.gif';
 
 // function ShoppingCart() {
 //   const [state, dispatch] = useStoreContext();
 //   const { id } = useParams();
 
-//   const [currentProduct, setCurrentProduct] = useState({});
+  const [currentVinyl, setCurrentVinyl] = useState({});
 
-//   const { loading, data } = useQuery(QUERY_PRODUCTS);
+  const { loading, data } = useQuery(QUERY_VINYLS);
 
-//   const { products, cart } = state;
+  const { vinyls, cart } = state;
 
-//   useEffect(() => {
-//     // already in global store
-//     if (products.length) {
-//       setCurrentProduct(products.find((product) => product._id === id));
-//     }
-//     // retrieved from server
-//     else if (data) {
-//       dispatch({
-//         type: UPDATE_PRODUCTS,
-//         products: data.products,
-//       });
+  useEffect(() => {
+    // already in global store
+    if (vinyls.length) {
+      setCurrentVinyl(vinyls.find((vinyl) => vinyl._id === id));
+    }
+    // retrieved from server
+    else if (data) {
+      dispatch({
+        type: UPDATE_VINYLS,
+        vinyls: data.vinyls,
+      });
 
-//       data.products.forEach((product) => {
-//         idbPromise('products', 'put', product);
-//       });
-//     }
-//     // get cache from idb
-//     else if (!loading) {
-//       idbPromise('products', 'get').then((indexedProducts) => {
-//         dispatch({
-//           type: UPDATE_PRODUCTS,
-//           products: indexedProducts,
-//         });
-//       });
-//     }
-//   }, [products, data, loading, dispatch, id]);
+      data.vinyls.forEach((vinyl) => {
+        idbPromise('vinyls', 'put', vinyl);
+      });
+    }
+    // get cache from idb
+    else if (!loading) {
+      idbPromise('vinyls', 'get').then((indexedVinyls) => {
+        dispatch({
+          type: UPDATE_VINYLS,
+          vinyls: indexedVinyls,
+        });
+      });
+    }
+  }, [vinyls, data, loading, dispatch, id]);
 
-//   const addToCart = () => {
-//     const itemInCart = cart.find((cartItem) => cartItem._id === id);
-//     if (itemInCart) {
-//       dispatch({
-//         type: UPDATE_CART_QUANTITY,
-//         _id: id,
-//         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-//       });
-//       idbPromise('cart', 'put', {
-//         ...itemInCart,
-//         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-//       });
-//     } else {
-//       dispatch({
-//         type: ADD_TO_CART,
-//         product: { ...currentProduct, purchaseQuantity: 1 },
-//       });
-//       idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
-//     }
-//   };
+  const addToCart = () => {
+    const itemInCart = cart.find((cartItem) => cartItem._id === id);
+    if (itemInCart) {
+      dispatch({
+        type: UPDATE_CART_QUANTITY,
+        _id: id,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+      });
+      idbPromise('cart', 'put', {
+        ...itemInCart,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+      });
+    } else {
+      dispatch({
+        type: ADD_TO_CART,
+        vinyl: { ...currentVinyl, purchaseQuantity: 1 },
+      });
+      idbPromise('cart', 'put', { ...currentVinyl, purchaseQuantity: 1 });
+    }
+  };
 
-//   const removeFromCart = () => {
-//     dispatch({
-//       type: REMOVE_FROM_CART,
-//       _id: currentProduct._id,
-//     });
+  const removeFromCart = () => {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      _id: currentVinyl._id,
+    });
 
-//     idbPromise('cart', 'delete', { ...currentProduct });
-//   };
+    idbPromise('cart', 'delete', { ...currentVinyl });
+  };
 
-//   return (
-//     <>
-//       {currentProduct && cart ? (
-//         <div className="container my-1">
-//           <Link to="/">← Back to Products</Link>
+  return (
+    <>
+      {currentVinyl && cart ? (
+        <div className="container my-1">
+          <Link to="/">← Back to Vinyls</Link>
 
-//           <h2>{currentProduct.name}</h2>
+          <h2>{currentVinyl.title}</h2>
 
-//           <p>{currentProduct.description}</p>
+          <p>Artist: {currentVinyl.artist}</p>
 
-//           <p>
-//             <strong>Price:</strong>${currentProduct.price}{' '}
-//             <button onClick={addToCart}>Add to Cart</button>
-//             <button
-//               disabled={!cart.find((p) => p._id === currentProduct._id)}
-//               onClick={removeFromCart}
-//             >
-//               Remove from Cart
-//             </button>
-//           </p>
+          <p>
+            <strong>Price:</strong>${currentVinyl.price}{' '}
+            <button onClick={addToCart}>Add to Cart</button>
+            <button
+              disabled={!cart.find((p) => p._id === currentVinyl._id)}
+              onClick={removeFromCart}
+            >
+              Remove from Cart
+            </button>
+          </p>
 
-//           <img
-//             src={`/images/${currentProduct.image}`}
-//             alt={currentProduct.name}
-//           />
-//         </div>
-//       ) : null}
-//       {/* {loading ? <img src={spinner} alt="loading" /> : null} */}
-//       <Cart />
-//     </>
-//   );
-// }
+          <img
+            src={`https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/${currentVinyl.image}`}
+            alt={currentVinyl.title}
+          />
+        </div>
+      ) : null}
+      {/* {loading ? <img src={spinner} alt="loading" /> : null} */}
+      <Cart />
+    </>
+  );
+}
 
 // export default ShoppingCart;

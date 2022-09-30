@@ -40,7 +40,7 @@ export const QUERY_USER = gql`
   }
 `;
 
-export const QUERY_VINYLS_BY_GENRE = gql`
+export const QUERY_VINYLS = gql`
   query getVinyls($genre: ID) {
     vinyls(genre: $genre) {
         _id
@@ -54,6 +54,20 @@ export const QUERY_VINYLS_BY_GENRE = gql`
     }
   }
 `;
+
+export const QUERY_VINYLS_BY_SEARCH = gql`
+    query getVinyls($search: String){
+        vinyls(search: $search) {
+            _id
+            title
+            artist
+            price
+            quantity
+            genres {
+                name
+            }
+        }
+    }`;
 
 export const QUERY_ALL_VINYLS = gql`
   {
