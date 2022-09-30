@@ -99,6 +99,7 @@ const Header = () => {
     };
 
     if (Auth.loggedIn()) {
+        console.log("hello world")
         return (
             <AppBar position="static">
                 <Container maxWidth="xl">
@@ -200,7 +201,7 @@ const Header = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> }
+                                    {<Avatar alt="OSBS" src="/static/images/avatar/2.jpg" /> }
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -220,20 +221,11 @@ const Header = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                    <MenuItem key={setting} onClick={handleCloseUserMenu(setting)}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
-                            <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                    />
-                            </Search>
                         </Box>
                     </Toolbar>
                 </Container>
@@ -342,7 +334,7 @@ const Header = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />}
+                                    {<Avatar alt="OSBS" src="/static/images/avatar/2.jpg" />}
                                 </IconButton>
                             </Tooltip>
                             <Menu
