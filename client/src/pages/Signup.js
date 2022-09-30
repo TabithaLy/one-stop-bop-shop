@@ -85,7 +85,7 @@ function Signup(props) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: '' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -135,7 +135,7 @@ function Signup(props) {
                   autoComplete="new-password"
                 />
               </Grid>
-
+              {/* <Button variant="contained" color="primary" href="/"> Back to Home Page </Button> */}
             </Grid>
             <Button
               type="submit"
@@ -161,3 +161,7 @@ function Signup(props) {
 }
 
 export default Signup;
+
+
+// back to home page button below
+// <Button variant="contained" color="primary" href="/"> Back to Home Page </Button>
