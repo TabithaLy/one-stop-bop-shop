@@ -13,7 +13,7 @@ import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import Vinyls from './pages/Vinyls'
-// import NoMatch from './pages/NoMatch';
+import SingleProduct from './pages/SingleProduct';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 // import Nav from './components/Nav';
@@ -64,11 +64,11 @@ function App() {
                 path="/signup" 
                 element={<Signup />} 
               />
-              {/* <Route 
-                path="/success" 
-                element={<Success />} 
-              />
               <Route 
+                path="/singleproduct" 
+                element={<SingleProduct />} 
+              />
+              {/* <Route 
                 path="/orderHistory" 
                 element={<OrderHistory />} 
               /> */}
