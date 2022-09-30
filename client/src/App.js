@@ -8,12 +8,14 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 // import logo from './logo.svg';
+import Header from "./components/Header";
+import Footer from "./components/Footer/index";
 import './App.css';
 
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import Vinyls from './pages/Vinyls'
-import SingleProduct from './pages/SingleProduct';
+import SingleProduct from './pages/Records';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 // import Nav from './components/Nav';
@@ -47,6 +49,7 @@ function App() {
       <Router>
         <div>
           <StoreProvider>
+            <Header />
             <Routes>
               <Route 
                 path="/" 
@@ -65,7 +68,7 @@ function App() {
                 element={<Signup />} 
               />
               <Route 
-                path="/singleproduct" 
+                path="/records" 
                 element={<SingleProduct />} 
               />
               {/* <Route 
@@ -81,6 +84,7 @@ function App() {
                 element={<NoMatch />} 
               /> */}
             </Routes>
+            <Footer />
           </StoreProvider>
         </div>
       </Router>
