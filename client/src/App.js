@@ -12,6 +12,7 @@ import './App.css';
 
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
+import Vinyls from './pages/Vinyls'
 // import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -49,8 +50,12 @@ function App() {
             <Routes>
               <Route 
                 path="/" 
-                element={<Vinyls />} 
+                element={<Home />} 
               />
+              <Route
+                path="/vinyls"
+                element={<Vinyls/>}
+                />
               <Route 
                 path="/login" 
                 element={<Login />} 

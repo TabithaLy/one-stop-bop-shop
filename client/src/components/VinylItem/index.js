@@ -44,13 +44,13 @@ function VinylItem(item) {
     <div className="card px-1 py-1">
       <Link to={`/vinyls/${_id}`}>
         <img
-          alt={title}
+          alt={image}
           src={`https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/${image}`}
         />
         <p>{title}</p>
       </Link>
       <div>
-        <div>{quantity} {pluralize("item", quantity)} in stock</div>
+        <div>{artist}</div>
         <span>${price}</span>
       </div>
       <button onClick={addToCart}>Add to cart</button>

@@ -5,7 +5,6 @@ import { UPDATE_VINYLS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import { QUERY_VINYLS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
-import spinner from '../../assets/spinner.gif';
 
 function VinylList() {
   const [state, dispatch] = useStoreContext();
@@ -63,7 +62,6 @@ function VinylList() {
       ) : (
         <h3>Nothing to display. Please contact us to request specific products! </h3>
       )}
-      {loading ? <img src={spinner} alt="loading" /> : null}
     </div>
   );
 }
