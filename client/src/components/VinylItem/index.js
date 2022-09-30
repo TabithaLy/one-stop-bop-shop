@@ -56,6 +56,13 @@ function VinylItem(item) {
       <button onClick={addToCart}>Add to cart</button>
     </div>
   );
+
+/*
+  return (
+    
+  )
+*/
+
 }
 
 export default VinylItem;
