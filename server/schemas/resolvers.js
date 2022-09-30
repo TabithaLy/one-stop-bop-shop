@@ -8,8 +8,8 @@ const resolvers = {
     genre: async () => {
       return await Genre.find();
     },
-    vinyls: async (parent, { genre, name }) => {
-      const params = {};
+    vinyls: async (parent, { genre, name, search }) => {
+      let params = {};
 
       if (genre) {
         params.genres = genre;
@@ -19,6 +19,11 @@ const resolvers = {
         params.title = {
           $regex: name
         };
+      }
+
+      if (search) {
+        params = {$or:[{artist:{$regex: search, $options: 'i'}},
+        {title:{$regex: search, $options: 'i'}}]}
       }
 
       return await Vinyl.find(params).populate('genres');
