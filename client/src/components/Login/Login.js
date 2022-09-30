@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -12,6 +11,12 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Container from '@material-ui/core/Container';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { Link } from 'react-router-dom';
+import { LOGIN } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 
 
@@ -31,14 +36,28 @@ function Copyright(props) {
     const theme = createTheme();
 
     export default function Login() {
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            const data = new FormData(event.currentTarget);
-            // eslint-disable-next-line no-console
-            console.log({
-              email: data.get('email'),
-              password: data.get('password'),
+        const [formState, setFormState] = useState({ email: '', password: '' });
+        const [login, { error }] = useMutation(LOGIN);
+
+        const handleChange = (event) => {
+            const { name, value } = event.target;
+            setFormState({
+              ...formState,
+              [name]: value,
             });
+          };
+
+        const handleSubmit = async (event) => {
+            event.preventDefault();
+            try {
+            const mutationResponse = await login({
+                variables: { email: formState.email, password: formState.password },
+            });
+            const token = mutationResponse.data.login.token;
+            Auth.login(token);
+            } catch (e) {
+            console.log(e);
+            }
           }
 
         return (
@@ -70,6 +89,7 @@ function Copyright(props) {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            onChange={handleChange}
                         />
                         <TextField
                             margin="normal"
@@ -80,6 +100,7 @@ function Copyright(props) {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            onChange={handleChange}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -96,7 +117,7 @@ function Copyright(props) {
                         <Grid container>
 
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link to="/signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
@@ -106,6 +127,11 @@ function Copyright(props) {
                 <Box mt={8}>
 
                 </Box>
+                {error ? (
+                    <div>
+                        <p className="error-text">The provided credentials are incorrect</p>
+                    </div>
+                    ) : null}
             </Container>
         </ThemeProvider>
         )

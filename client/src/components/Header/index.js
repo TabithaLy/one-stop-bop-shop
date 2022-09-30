@@ -20,6 +20,8 @@ import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import Auth from '../../utils/auth';
 import './style.css';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../../utils/queries';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -63,6 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+
 const pages = ['Shopping Cart', 'Search'];
 const userPages = ['Signup', 'Login']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -71,6 +74,12 @@ const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [value, setValue] = React.useState(0);
+    const { data } = useQuery(QUERY_USER);
+    let user;
+
+    if (data) {
+        user = data.user;
+    }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -203,7 +212,7 @@ const Header = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt="OSBS" src="/static/images/avatar/2.jpg" /> }
+                                    {<Avatar alt="ARK" src="/static/images/avatar/2.jpg" /> }
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -356,7 +365,7 @@ const Header = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt="OSBS" src="/static/images/avatar/2.jpg" />}
+                                    {<Avatar alt={user ? user.firstName : "User"} src="/static/images/avatar/2.jpg" />}
                                 </IconButton>
                             </Tooltip>
                             <Menu
