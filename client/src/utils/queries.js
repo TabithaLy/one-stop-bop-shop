@@ -55,7 +55,7 @@ export const QUERY_VINYLS_BY_GENRE = gql`
   }
 `;
 
-export const QUERY_ALL_PRODUCTS = gql`
+export const QUERY_ALL_VINYLS = gql`
   {
     vinyls {
         _id
