@@ -112,6 +112,6 @@ import { idbPromise } from '../utils/helpers';
       <Cart />
     </>
   );
-}
+
 
 // export default ShoppingCart;
