@@ -7,6 +7,7 @@ const Vinyls = () => {
   return (
     <div className="container">
       <Header/>
+      <h1>hello</h1>
       <VinylList />
     </div>
   );
