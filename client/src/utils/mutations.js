@@ -22,6 +22,7 @@ export const ADD_ORDER = gql`
         title
         artist
         price
+        image
         quantity
         genres {
           name
