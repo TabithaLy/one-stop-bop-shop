@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import CartIcon from '@mui/icons-material/ShoppingCartOutlined'
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -13,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import AlbumIcon from '@mui/icons-material/Album';
+import Badge from '@mui/material/Badge';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
@@ -234,6 +236,17 @@ const Header = () => {
                                     inputProps={{ 'aria-label': 'search' }}
                                     />
                             </Search>
+
+
+
+                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                <Badge badgeContent={4} color="error">
+                                    <CartIcon />
+                                </Badge>
+                                </IconButton>
+
+
+
                         </Box>
                     </Toolbar>
                 </Container>
@@ -367,6 +380,12 @@ const Header = () => {
                                     </MenuItem>
                                 ))}
                             </Menu>
+
+                                    <IconButton size="large" aria-label="show 4 items" color="inherit">
+                                        <Badge badgeContent={4} color="error">
+                                            <CartIcon />
+                                        </Badge>
+                                    </IconButton>
                                 </Box>
                     </Toolbar>
                 </Container>
