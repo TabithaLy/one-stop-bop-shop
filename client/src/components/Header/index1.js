@@ -54,7 +54,7 @@ const Header = () => {
           <div className="tabColor">
             <Box sx={{ width: '100%' }}>
               <Tabs value={value} onChange={handleChange} aria-label="nav tabs" textColor="inherit">
-              <Tab label="One Stop Bop Shop" wrapped href="/"/>
+                <Tab label="One Stop Bop Shop" wrapped href="/"/>
                 <Tab className="tab" label="Signup" href="/signup" />
                 <Tab className="tab" label="Login" href="/login" />
               </Tabs>

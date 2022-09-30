@@ -76,6 +76,7 @@ const Header = () => {
             Auth.logout();
         }
     };
+
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -87,9 +88,16 @@ const Header = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (setting) => {
+        console.log(setting)
+        setAnchorElUser(setting)
+        if (setting === "Logout") {
+            console.log("hello world")
+            Auth.logout();
+        }
         setAnchorElUser(null);
     };
+
     if (Auth.loggedIn()) {
         return (
             <AppBar position="static">
@@ -316,6 +324,7 @@ const Header = () => {
                                     key={page}
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block' }}
+                                    href={page}
                                 >
                                     {page}
                                 </Button>
@@ -353,7 +362,7 @@ const Header = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                    <MenuItem key={setting} onClick= {() => {handleCloseUserMenu(setting)}}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </MenuItem>
                                 ))}
