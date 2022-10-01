@@ -38,7 +38,7 @@ function VinylList() {
       return state.vinyls;
     }
 
-    return state.vinyls.filter((vinyl) => vinyl.genre._id === currentGenre);
+    return state.vinyls.filter((vinyl) => vinyl.genres.includes(currentGenre));
   }
 
   // return (
