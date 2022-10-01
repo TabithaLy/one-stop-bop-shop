@@ -1,16 +1,20 @@
 import '../index.css';
-import Header from "../components/Header";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from '@mui/material';
 import Banner from "../assets/images/banner.png";
 import GenreOne from "../assets/images/genre-one.png";
+import Auth from "../utils/auth";
+
 
 function Home() {
   return (
     <>
-    <Header />
+    {Auth.loggedIn() ? (
+      <h1>logged in</h1>
+    ) :
+    null}
     <Box sx={{ flexGrow: 1 }}>
       {/* Banner */}
       <Grid container>

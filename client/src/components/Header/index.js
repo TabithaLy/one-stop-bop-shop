@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import CartIcon from '@mui/icons-material/ShoppingCartOutlined'
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -13,11 +14,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import AlbumIcon from '@mui/icons-material/Album';
+import Badge from '@mui/material/Badge';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import Auth from '../../utils/auth';
 import './style.css';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../../utils/queries';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -61,6 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+
 const pages = ['Shopping Cart', 'Search'];
 const userPages = ['Signup', 'Login']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -69,6 +74,12 @@ const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [value, setValue] = React.useState(0);
+    const { data } = useQuery(QUERY_USER);
+    let user;
+
+    if (data) {
+        user = data.user;
+    }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -201,7 +212,7 @@ const Header = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt="OSBS" src="/static/images/avatar/2.jpg" /> }
+                                    {<Avatar alt="ARK" src="/static/images/avatar/2.jpg" /> }
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -226,6 +237,26 @@ const Header = () => {
                                     </MenuItem>
                                 ))}
                             </Menu>
+                            <Search>
+                                <SearchIconWrapper>
+                                    <SearchIcon />
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    placeholder="Search…"
+                                    inputProps={{ 'aria-label': 'search' }}
+                                    />
+                            </Search>
+
+
+
+                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                <Badge badgeContent={4} color="error">
+                                    <CartIcon />
+                                </Badge>
+                                </IconButton>
+
+
+
                         </Box>
                     </Toolbar>
                 </Container>
@@ -334,7 +365,7 @@ const Header = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt="OSBS" src="/static/images/avatar/2.jpg" />}
+                                    {<Avatar alt={user ? user.firstName : "User"} src="/static/images/avatar/2.jpg" />}
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -359,6 +390,12 @@ const Header = () => {
                                     </MenuItem>
                                 ))}
                             </Menu>
+
+                                    <IconButton size="large" aria-label="show 4 items" color="inherit">
+                                        <Badge badgeContent={4} color="error">
+                                            <CartIcon />
+                                        </Badge>
+                                    </IconButton>
                                 </Box>
                     </Toolbar>
                 </Container>
