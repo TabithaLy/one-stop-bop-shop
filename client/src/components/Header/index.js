@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import MenuList from '@mui/material/MenuList';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import CartIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -18,6 +19,7 @@ import Badge from '@mui/material/Badge';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
+import PersonIcon from '@mui/icons-material/Person';
 import Auth from '../../utils/auth';
 import './style.css';
 import { useQuery } from '@apollo/client';
@@ -68,7 +70,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const pages = ['Shopping Cart', 'Search'];
 const userPages = ['Signup', 'Login']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -103,7 +105,7 @@ const Header = () => {
         console.log(setting)
         setAnchorElUser(setting)
         if (setting === "Logout") {
-            console.log("hello world")
+            console.log("CALLING LOGOUT")
             Auth.logout();
         }
         setAnchorElUser(null);
@@ -145,30 +147,7 @@ const Header = () => {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none' },
-                                }}
-                            >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleChange}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
+                            
                         </Box>
                         {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                         <Typography
@@ -232,7 +211,7 @@ const Header = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu(setting)}>
+                                    <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </MenuItem>
                                 ))}
@@ -364,8 +343,8 @@ const Header = () => {
                             </Search>
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt={user ? user.firstName : "User"} src="/static/images/avatar/2.jpg" />}
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} size="large" aria-label="show user menu" color="inherit">
+                                    <PersonIcon/>
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -384,11 +363,11 @@ const Header = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick= {() => {handleCloseUserMenu(setting)}}>
-                                        <Typography textAlign="center">{setting}</Typography>
+                                {/*profile dropdown options for when logged out*/}
+                                    <MenuItem key='amLoggedOut' onClick= {() => {handleCloseUserMenu('amLoggedOut')}}>
+                                        <Typography textAlign="center">You are not logged in. <br></br>
+                                        <a href='/login'>Sign In</a> to view your account.</Typography>
                                     </MenuItem>
-                                ))}
                             </Menu>
 
                                     <IconButton size="large" aria-label="show 4 items" color="inherit">
