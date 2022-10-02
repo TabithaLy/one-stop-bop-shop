@@ -25,15 +25,36 @@ import Auth from '../../utils/auth';
 import './style.css';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
+import Autocomplete from '@mui/material/Autocomplete';
 
 
 import CartItem from '../CartItem';
 import { useStoreContext } from '../../utils/GlobalState';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART,UPDATE_SEARCH } from '../../utils/actions';
 import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#1d6e8c',
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      main: '#eda96c',
+    },
+    error: {
+        main: '#ec703d',
+      },
+  },
+});
+
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -86,6 +107,7 @@ const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [anchorElCart, setAnchorElCart] = React.useState(null);
+    const [autocompleteInputValue, setAutocompleteInputValue] = React.useState('');
     const [value, setValue] = React.useState(0);
     const { userdata } = useQuery(QUERY_USER);
     let user;
@@ -181,9 +203,17 @@ const Header = () => {
         setAnchorElUser(null);
     };
 
+    const handleSearch = (searchString) => {
+        dispatch({
+          type: UPDATE_SEARCH,
+          search: searchString,
+        });
+      };
+
     if (Auth.loggedIn()) {
-        console.log("hello world")
+        
         return (
+            <ThemeProvider theme={theme}>
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
@@ -241,18 +271,25 @@ const Header = () => {
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             
                         </Box>
+                        
                         <Search>
                                 <SearchIconWrapper>
                                     <SearchIcon />
                                 </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
+                                <Autocomplete
+                                    id="search"
+                                    inputValue={autocompleteInputValue}
+                                    onInputChange={(event, newInputValue) => {
+                                    setAutocompleteInputValue(newInputValue);
+                                    }}
+                                    freeSolo
+                                    options={['daf','dafskj','weori']}
+                                    renderInput={(params) => <StyledInputBase {...params} placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />}
                                     />
                             </Search>
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open User Menu">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} size="large" aria-label="show user menu" color="inherit">
+                                <IconButton onClick={handleOpenUserMenu} size="large" aria-label="show user menu" color="inherit">
                                     <PersonIcon/>
                                 </IconButton>
                             </Tooltip>
@@ -282,7 +319,7 @@ const Header = () => {
 
                         <Tooltip title="Open Cart">
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleOpenCartMenu}>
-                                <Badge badgeContent={4} color="error">
+                                <Badge badgeContent={state.cart.length} color="error">
                                     <CartIcon />
                                 </Badge>
                                 </IconButton>
@@ -314,23 +351,20 @@ const Header = () => {
                                 </div>
                             ) : (
                                 <h3>
-                                <span role="img" aria-label="shocked">
-                                    😱
-                                </span>
                                 You haven't added anything to your cart yet!
                                 </h3>
                             )}
                         </Menu>
 
-
-
                         </Box>
                     </Toolbar>
                 </Container>
             </AppBar>
+            </ThemeProvider>
         );
     } else {
         return ((
+            <ThemeProvider theme={theme}>
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
@@ -459,7 +493,7 @@ const Header = () => {
                             </Menu>
 
                                     <IconButton size="large" aria-label="show 4 items" color="inherit">
-                                        <Badge badgeContent={4} color="error">
+                                        <Badge badgeContent={state.cart.length} color="secondary">
                                             <CartIcon />
                                         </Badge>
                                     </IconButton>
@@ -467,6 +501,7 @@ const Header = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
+            </ThemeProvider>
         )
         );
     }
