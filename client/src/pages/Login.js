@@ -21,27 +21,25 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Avatar } from "@mui/material";
 import { Link } from 'react-router-dom';
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        One Stop Bop Shop
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 function Login(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
-  const theme = createTheme();
+  const theme = createTheme({
+    palette: {
+      primary: {
+        // light: will be calculated from palette.primary.main,
+        main: '#1d6e8c',
+        // dark: will be calculated from palette.primary.main,
+        // contrastText: will be calculated to contrast with palette.primary.main
+      },
+      secondary: {
+        main: '#eda96c',
+      },
+      error: {
+          main: '#ec703d',
+        },
+    },
+  });
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -62,6 +60,24 @@ function Login(props) {
       [name]: value,
     });
   };
+
+  function Copyright(props) {
+    return (
+      <Typography
+        variant="body2"
+        color={theme.palette.primary.light}
+        align="center"
+        {...props}
+      >
+        {"Copyright © "}
+        <Link color={theme.palette.primary.light} href="/">
+          One Stop Bop Shop
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    );
+  }
 
   return (
     <container>
@@ -150,13 +166,17 @@ function Login(props) {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
+                    <Link href="#" >
+                      <Typography variant="body1" color={theme.palette.primary.dark}>
+                        Forgot password?
+                      </Typography>
                     </Link>
                   </Grid>
                   <Grid item>
-                    <Link to="/signup" variant="body2">
-                      {"Don't have an account? Sign Up"}
+                    <Link to="/signup" >
+                    <Typography variant="body1" color={theme.palette.primary.dark}>
+                        Don't have an account? Sign up
+                      </Typography>
                     </Link>
                   </Grid>
                 </Grid>

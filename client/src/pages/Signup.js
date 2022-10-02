@@ -23,27 +23,25 @@ import { Link } from 'react-router-dom';
 
 
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        One Stop Bop Shop
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 function Signup(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [addUser] = useMutation(ADD_USER);
-  const theme = createTheme();
+  const theme = createTheme({
+    palette: {
+      primary: {
+        // light: will be calculated from palette.primary.main,
+        main: '#1d6e8c',
+        // dark: will be calculated from palette.primary.main,
+        // contrastText: will be calculated to contrast with palette.primary.main
+      },
+      secondary: {
+        main: '#eda96c',
+      },
+      error: {
+          main: '#ec703d',
+        },
+    },
+  });
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
@@ -65,15 +63,23 @@ function Signup(props) {
       [name]: value,
     });
   }
-  // function ImageAvatars() {
-  // return (
-  //   <Stack direction="row" spacing={2}>
-  //     <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-  //     <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-  //     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-  //   </Stack>
-  // );
-
+  function Copyright(props) {
+    return (
+      <Typography
+        variant="body2"
+        color={theme.palette.primary.light}
+        align="center"
+        {...props}
+      >
+        {"Copyright © "}
+        <a color="inherit" href="/">
+          One Stop Bop Shop
+        </a>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    );
+  }
 
   return (
     

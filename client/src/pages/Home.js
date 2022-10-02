@@ -12,15 +12,11 @@ function Home() {
 
   return (
     <>
-    {Auth.loggedIn() ? (
-      <h1>logged in</h1>
-    ) :
-    null}
     <Box sx={{ flexGrow: 1 }}>
       {/* Banner */}
       <Grid container>
         <Grid item xs={12} md={12}>
-          <img className="banner" src={Banner} alt="store banner" />
+          <img className="banner" src={Banner} alt="store banner"/>
         </Grid>
       </Grid>
       {/* Close Banner */}
