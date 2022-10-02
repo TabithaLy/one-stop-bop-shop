@@ -12,9 +12,9 @@ function Footer () {
 				<h3>One Stop Bop Shop</h3>
 
 				<p class="footer-links">
-					<a href="#" class="link-1">Home</a>
+					<a href="/" class="link-1">Home</a>
 					
-					<a href="#">Products</a>
+					<a href="/vinyls">Products</a>
 					
 					<a href="#">Contact</a>
 				</p>

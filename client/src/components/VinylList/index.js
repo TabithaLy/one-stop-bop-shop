@@ -38,7 +38,14 @@ function VinylList() {
       return state.vinyls;
     }
 
-    return state.vinyls.filter((vinyl) => vinyl.genres.includes(currentGenre));
+    return state.vinyls.filter((vinyl) => {
+        for (let i=0; i<vinyl.genres.length; i++) {
+            if (vinyl.genres[i]._id === currentGenre) {
+                console.log(vinyl.title)
+                return true
+            }
+        }
+        return false});
   }
 
   // return (
