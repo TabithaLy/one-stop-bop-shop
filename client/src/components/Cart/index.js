@@ -61,7 +61,6 @@ const Cart = () => {
         vinylIds.push(item._id);
       }
     });
-
     getCheckout({
       variables: { vinyls: vinylIds },
     });

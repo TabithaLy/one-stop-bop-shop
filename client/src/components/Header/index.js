@@ -1,9 +1,11 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import MenuList from '@mui/material/MenuList';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import CartIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -18,10 +20,20 @@ import Badge from '@mui/material/Badge';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
+import PersonIcon from '@mui/icons-material/Person';
 import Auth from '../../utils/auth';
 import './style.css';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
+
+
+import CartItem from '../CartItem';
+import { useStoreContext } from '../../utils/GlobalState';
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
+import { loadStripe } from '@stripe/stripe-js';
+import { useLazyQuery } from '@apollo/client';
+import { QUERY_CHECKOUT } from '../../utils/queries';
+import { idbPromise } from '../../utils/helpers';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -65,20 +77,73 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 const pages = ['Shopping Cart', 'Search'];
 const userPages = ['Signup', 'Login']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElCart, setAnchorElCart] = React.useState(null);
     const [value, setValue] = React.useState(0);
-    const { data } = useQuery(QUERY_USER);
+    const { userdata } = useQuery(QUERY_USER);
     let user;
+    const [state, dispatch] = useStoreContext();
+    const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+  
+    // We check to see if there is a data object that exists, if so this means that a checkout session was returned from the backend
+    // Then we should redirect to the checkout with a reference to our session id
+    useEffect(() => {
+      if (data) {
+        stripePromise.then((res) => {
+          res.redirectToCheckout({ sessionId: data.checkout.session });
+        });
+      }
+    }, [data]);
+  
+    // If the cart's length or if the dispatch function is updated, check to see if the cart is empty.
+    // If so, invoke the getCart method and populate the cart with the existing from the session
+    useEffect(() => {
+      async function getCart() {
+        const cart = await idbPromise('cart', 'get');
+        dispatch({ type: ADD_MULTIPLE_TO_CART, vinyls: [...cart] });
+      }
+  
+      if (!state.cart.length) {
+        getCart();
+      }
+    }, [state.cart.length, dispatch]);
+  
+    function toggleCart() {
+      dispatch({ type: TOGGLE_CART });
+    }
+  
+    function calculateTotal() {
+      let sum = 0;
+      state.cart.forEach((item) => {
+        sum += item.price * item.purchaseQuantity;
+      });
+      return sum.toFixed(2);
+    }
+  
+    // When the submit checkout method is invoked, loop through each item in the cart
+    // Add each item id to the vinylIds array and then invoke the getCheckout query passing an object containing the id for all our vinyls
+    function submitCheckout() {
+      const vinylIds = [];
+  
+      state.cart.forEach((item) => {
+        for (let i = 0; i < item.purchaseQuantity; i++) {
+          vinylIds.push(item._id);
+        }
+      });
+      getCheckout({
+        variables: { vinyls: vinylIds },
+      });
+    }
 
-    if (data) {
-        user = data.user;
+    if (userdata) {
+        user = userdata.user;
     }
 
     const handleChange = (event, newValue) => {
@@ -86,6 +151,13 @@ const Header = () => {
         if (event.target.page === "Logout") {
             Auth.logout();
         }
+    };
+    const handleOpenCartMenu = (event) => {
+        setAnchorElCart(event.currentTarget);
+    };
+
+    const handleCloseCartMenu = () => {
+        setAnchorElCart(null);
     };
 
     const handleOpenNavMenu = (event) => {
@@ -103,7 +175,7 @@ const Header = () => {
         console.log(setting)
         setAnchorElUser(setting)
         if (setting === "Logout") {
-            console.log("hello world")
+            console.log("CALLING LOGOUT")
             Auth.logout();
         }
         setAnchorElUser(null);
@@ -145,30 +217,7 @@ const Header = () => {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none' },
-                                }}
-                            >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleChange}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
+                            
                         </Box>
                         {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                         <Typography
@@ -190,15 +239,7 @@ const Header = () => {
                             LOGO
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
+                            
                         </Box>
                         <Search>
                                 <SearchIconWrapper>
@@ -210,9 +251,9 @@ const Header = () => {
                                     />
                             </Search>
                         <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt="ARK" src="/static/images/avatar/2.jpg" /> }
+                            <Tooltip title="Open User Menu">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} size="large" aria-label="show user menu" color="inherit">
+                                    <PersonIcon/>
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -232,28 +273,54 @@ const Header = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu(setting)}>
+                                    <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
-                            <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                    />
-                            </Search>
 
 
-
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                        <Tooltip title="Open Cart">
+                            <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleOpenCartMenu}>
                                 <Badge badgeContent={4} color="error">
                                     <CartIcon />
                                 </Badge>
                                 </IconButton>
+                        </Tooltip>
+                        <Menu
+                            id="cart"
+                            anchorEl={anchorElCart}
+                            open={Boolean(anchorElCart)}
+                            onClose={handleCloseCartMenu}
+                        >
+                            {state.cart.length ? (
+                                <div>
+                                {state.cart.map((item) => (
+                                    <MenuItem key={item._id}>
+                                        <CartItem key={item._id} item={item} />
+                                    </MenuItem>
+                                ))}
+
+                                <div className="flex-row space-between">
+                                    <strong>Total: ${calculateTotal()}</strong>
+
+                                    {/* Check to see if the user is logged in. If so render a button to check out */}
+                                    {Auth.loggedIn() ? (
+                                    <button onClick={submitCheckout}>Checkout</button>
+                                    ) : (
+                                    <span>(log in to check out)</span>
+                                    )}
+                                </div>
+                                </div>
+                            ) : (
+                                <h3>
+                                <span role="img" aria-label="shocked">
+                                    😱
+                                </span>
+                                You haven't added anything to your cart yet!
+                                </h3>
+                            )}
+                        </Menu>
 
 
 
@@ -364,8 +431,8 @@ const Header = () => {
                             </Search>
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt={user ? user.firstName : "User"} src="/static/images/avatar/2.jpg" />}
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} size="large" aria-label="show user menu" color="inherit">
+                                    <PersonIcon/>
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -384,11 +451,11 @@ const Header = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick= {() => {handleCloseUserMenu(setting)}}>
-                                        <Typography textAlign="center">{setting}</Typography>
+                                {/*profile dropdown options for when logged out*/}
+                                    <MenuItem key='amLoggedOut' onClick= {() => {handleCloseUserMenu('amLoggedOut')}}>
+                                        <Typography textAlign="center">You are not logged in. <br></br>
+                                        <a href='/login'>Sign In</a> to view your account.</Typography>
                                     </MenuItem>
-                                ))}
                             </Menu>
 
                                     <IconButton size="large" aria-label="show 4 items" color="inherit">

@@ -52,6 +52,7 @@ export const QUERY_VINYLS = gql`
         quantity
         genres {
             name
+            _id
         }
     }
   }
@@ -68,6 +69,7 @@ export const QUERY_VINYLS_BY_SEARCH = gql`
             quantity
             genres {
                 name
+                _id
             }
         }
     }`;
@@ -83,6 +85,7 @@ export const QUERY_ALL_VINYLS = gql`
         quantity
         genres {
             name
+            _id
         }
     }
   }
