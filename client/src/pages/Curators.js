@@ -9,6 +9,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     backgroundColor: "#44b700",
@@ -43,7 +44,7 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   height: 22,
   border: `2px solid ${theme.palette.background.paper}`,
 }));
-
+ 
 function ImageAvatars() {
   return (
     <Stack direction="auto" spacing={50} >
