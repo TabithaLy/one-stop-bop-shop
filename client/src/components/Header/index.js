@@ -10,8 +10,8 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import CartIcon from '@mui/icons-material/ShoppingCartOutlined'
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import { Grid } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -337,17 +337,29 @@ const Header = () => {
                                         <CartItem key={item._id} item={item} />
                                     </MenuItem>
                                 ))}
-
-                                <div className="flex-row space-between">
-                                    <strong>Total: ${calculateTotal()}</strong>
-
-                                    {/* Check to see if the user is logged in. If so render a button to check out */}
-                                    {Auth.loggedIn() ? (
-                                    <button onClick={submitCheckout}>Checkout</button>
-                                    ) : (
-                                    <span>(log in to check out)</span>
-                                    )}
-                                </div>
+                                <Grid
+                                container
+                                direction="row"
+                                justifyContent="space-between"
+                                alignItems = "center"
+                                
+                                >
+                                    <Grid item >
+                                        
+                                            <Typography sx={{ mx: 1 }}>Total: ${calculateTotal()} </Typography>
+                                        
+                                    </Grid>
+                                    <Grid item >
+                                        
+                                            {Auth.loggedIn() ? (
+                                            <Button variant="text"  onClick={submitCheckout}>Checkout</Button>
+                                            ) : (
+                                            <Typography>Log in to check out</Typography>
+                                            )}
+                                        
+                                    </Grid>
+                                </Grid>
+                                
                                 </div>
                             ) : (
                                 <h3>
