@@ -19,70 +19,94 @@ import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 
-    handleInputChange = (event) => {
+// const [formState, setFormState] = useState({ email: '', password: '' });
+// const [login, { error }] = useMutation(LOGIN);
+
+// // update state based on form input changes
+// const handleChange = (event) => {
+//     const { name, value } = event.target;
+
+//     setFormState({
+//         ...formState,
+//         [name]: value,
+//     });
+// };
+
+// // submit form
+// const handleFormSubmit = async (event) => {
+//     event.preventDefault();
+
+//     try {
+//         const { data } = await login({
+//             variables: { ...formState },
+//         });
+
+//         Auth.login(data.login.token);
+//     } catch (e) {
+//         console.error(e);
+//     }
+
+//     // clear form values 
+//     setFormState({
+//         email: '',
+//         password: '',
+//     });
+// };
+
+const theme = createTheme();
+
+export default function Login() {
+    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [login, { error }] = useMutation(LOGIN);
+
+
+    // update state based on form input changes
+    const handleChange = (event) => {
         const { name, value } = event.target;
-        this.setState({
-            [name]: value
+
+        setFormState({
+            ...formState,
+            [name]: value,
         });
-    };
+    }
 
-    handleSubmit = (event) => {
+    // submit form
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        this.setState({redirect: true});
-    };
 
-    render() {
-        if (this.state.redirect) {
-            return <Redirect to='/home' />
+        try {
+            const { data } = await login({
+                variables: { ...formState },
+            });
+
+            Auth.login(data.login.token);
         }
-        return ( 
+        catch (e) {
+            console.error(e);
 
-    export default function Login() {
-        const [formState, setFormState] = useState({ email: '', password: '' });
-        const [login, { error }] = useMutation(LOGIN);
+        }
 
-        const handleChange = (event) => {
-            const { name, value } = event.target;
-            setFormState({
-              ...formState,
-              [name]: value,
-            });
-          };
+        // clear form values
+        setFormState({
 
-        const handleSubmit = async (event) => {
-            event.preventDefault();
-            try {
-            const mutationResponse = await login({
-                variables: { email: formState.email, password: formState.password },
-            });
-            const token = mutationResponse.data.login.token;
-            Auth.login(token);
-            } catch (e) {
-            console.log(e);
-            }
-          }
+            email: '',
+            password: '',
+        });
+    }
 
-        return (
-            <ThemeProvider theme={theme}>
+    return (
+
+        <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <div>
+                    <Avatar>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <h1>Login</h1>
+                    <form onSubmit={handleFormSubmit}>
                         <TextField
-
+                            variant="outlined"
                             margin="normal"
                             required
                             fullWidth
@@ -91,9 +115,11 @@ import Auth from '../utils/auth';
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            value={formState.email}
                             onChange={handleChange}
                         />
                         <TextField
+                            variant="outlined"
                             margin="normal"
                             required
                             fullWidth
@@ -102,6 +128,7 @@ import Auth from '../utils/auth';
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            value={formState.password}
                             onChange={handleChange}
                         />
                         <FormControlLabel
@@ -112,33 +139,154 @@ import Auth from '../utils/auth';
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            color="primary"
                         >
-                            Sign In
+                            Login
                         </Button>
                         <Grid container>
-
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
+                                </Link>
+                            </Grid>
                             <Grid item>
-                                <Link to="/signup" variant="body2">
+                                <Link href="/signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
                         </Grid>
-                    </Box>
-                </Box>
+                    </form>
+                </div>
                 <Box mt={8}>
-
                 </Box>
-                {error ? (
-                    <div>
-                        <p className="error-text">The provided credentials are incorrect</p>
-                    </div>
-                    ) : null}
             </Container>
         </ThemeProvider>
-        )
-    }   
+    );
 }
+
+
+
+
+//     handleInputChange = (event) => {
+//         const { name, value } = event.target;
+//         this.setState({
+//             [name]: value
+//         });
+//     };
+
+//     handleSubmit = (event) => {
+//         event.preventDefault();
+//         this.setState({redirect: true});
+//     };
+
+//     render() {
+//         if (this.state.redirect) {
+//             return <Redirect to='/home' />
+//         }
+//         return ( 
+
+//     export default function Login() {
+//         const [formState, setFormState] = useState({ email: '', password: '' });
+//         const [login, { error }] = useMutation(LOGIN);
+
+//         const handleChange = (event) => {
+//             const { name, value } = event.target;
+//             setFormState({
+//               ...formState,
+//               [name]: value,
+//             });
+//           };
+
+//         const handleSubmit = async (event) => {
+//             event.preventDefault();
+//             try {
+//             const mutationResponse = await login({
+//                 variables: { email: formState.email, password: formState.password },
+//             });
+//             const token = mutationResponse.data.login.token;
+//             Auth.login(token);
+//             } catch (e) {
+//             console.log(e);
+//             }
+//           }
+
+//         return (
+//             <ThemeProvider theme={theme}>
+//             <Container component="main" maxWidth="xs">
+//                 <CssBaseline />
+//                 <Box
+//                     sx={{
+//                         marginTop: 8,
+//                         display: 'flex',
+//                         flexDirection: 'column',
+//                         alignItems: 'center',
+//                     }}
+//                 >
+//                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+//                         <LockOutlinedIcon />
+//                     </Avatar>
+//                     <Typography component="h1" variant="h5">
+//                         Sign in
+//                     </Typography>
+//                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+//                         <TextField
+
+//                             margin="normal"
+//                             required
+//                             fullWidth
+//                             id="email"
+//                             label="Email Address"
+//                             name="email"
+//                             autoComplete="email"
+//                             autoFocus
+//                             onChange={handleChange}
+//                         />
+//                         <TextField
+//                             margin="normal"
+//                             required
+//                             fullWidth
+//                             name="password"
+//                             label="Password"
+//                             type="password"
+//                             id="password"
+//                             autoComplete="current-password"
+//                             onChange={handleChange}
+//                         />
+//                         <FormControlLabel
+//                             control={<Checkbox value="remember" color="primary" />}
+//                             label="Remember me"
+//                         />
+//                         <Button
+//                             type="submit"
+//                             fullWidth
+//                             variant="contained"
+//                             sx={{ mt: 3, mb: 2 }}
+//                         >
+//                             Sign In
+//                         </Button>
+//                         <Grid container>
+
+//                             <Grid item>
+//                                 <Link to="/signup" variant="body2">
+//                                     {"Don't have an account? Sign Up"}
+//                                 </Link>
+//                             </Grid>
+//                         </Grid>
+//                     </Box>
+//                 </Box>
+//                 <Box mt={8}>
+
+//                 </Box>
+//                 {error ? (
+//                     <div>
+//                         <p className="error-text">The provided credentials are incorrect</p>
+//                     </div>
+//                     ) : null}
+//             </Container>
+//         </ThemeProvider>
+//         )
+//     }   
+// }
 
 
 
