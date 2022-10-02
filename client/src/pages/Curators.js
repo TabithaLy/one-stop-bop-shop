@@ -9,7 +9,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 
-
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     backgroundColor: "#44b700",
@@ -44,10 +43,10 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   height: 22,
   border: `2px solid ${theme.palette.background.paper}`,
 }));
- 
+
 function ImageAvatars() {
   return (
-    <Stack direction="auto" spacing={50} >
+    <Stack direction="auto" spacing={50}>
       <Avatar alt="Nathan Soum" src="/static/images/avatar/1.jpg" />
       <Avatar alt="Tabitha Spencer-Salmon" src="/static/images/avatar/2.jpg" />
       <Avatar alt="Chase Stratton" src="/static/images/avatar/3.jpg" />
@@ -56,25 +55,16 @@ function ImageAvatars() {
   );
 }
 
-// BEGINNING OF CURATORS PAGE
-// iframes are used to display the spotify playlists of each curator on the page
-// the spotify playlists are embedded in the iframes
-// the iframes are styled using the sx prop
-// the iframes are wrapped in a Paper component from Material UI
-// the playlist will be in 1 column on desktop and 2 columns on mobile
-//starting with the first curator, Nathan Soum
-//then Tabitha Spencer-Salmon
-//then Chase Stratton
-//then Emily Rose
-// each curator has a title, a description, and a spotify playlist
-//the playlist will be a row of 4 images of the album covers of the records in the playlist
-//the images will be clickable and will link to the spotify playlist
-//the images will be wrapped in a Paper component from Material UI
+// below is the start of the Curators page that includes the Curators component and the Curators component is the one that has the avatars and the badges and the github icons and the names of the curators and the description of the curators and iframe that shows the github profile of the curators.
+// iframe is used to show the curators playlist on the page.
+
+// github icon is used to link to the curators github profile but it is not working yet. 
+
 export default function Curators() {
   return (
     <div>
       <ImageAvatars />
-      <Container justify="center" align="center" >
+      <Container justify="center" align="center">
         <Typography
           variant="h4"
           align="center"
@@ -123,8 +113,7 @@ export default function Curators() {
                 Nathan is a music lover who has a passion for vinyl records. He
                 has a wide range of music tastes and is always looking for new
                 music to listen to. He is here to help you find the perfect
-                record for you. <GitHubIcon  href = "www.github.com/nathansoum" />
-
+                record for you. <GitHubIcon href="www.github.com/nathansoum" />
               </Typography>
               <iframe
                 src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO216tjq?utm_source=generator"
@@ -158,7 +147,8 @@ export default function Curators() {
                 Tabitha is a music lover who has a passion for vinyl records.
                 She has a wide range of music tastes and is always looking for
                 new music to listen to. She is here to help you find the perfect
-                record for you. <GitHubIcon  href = "www.github.com/tabitha-salmon" />
+                record for you.{" "}
+                <GitHubIcon href="www.github.com/tabitha-salmon" />
               </Typography>
               <iframe
                 src="https://open.spotify.com/embed/album/4sgYpkIASM1jVlNC8Wp9oF?utm_source=generator"
@@ -192,7 +182,8 @@ export default function Curators() {
                 Chase is a music lover who has a passion for vinyl records. He
                 has a wide range of music tastes and is always looking for new
                 music to listen to. He is here to help you find the perfect
-                record for you. <GitHubIcon  href = "www.github.com/chase-stratton" />
+                record for you.{" "}
+                <GitHubIcon href="www.github.com/chase-stratton" />
               </Typography>
               <iframe
                 src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdyjMX5o2vCq?utm_source=generator"
@@ -226,7 +217,8 @@ export default function Curators() {
                 Emily is a music lover who has a passion for vinyl records. She
                 has a wide range of music tastes and is always looking for new
                 music to listen to. She is here to help you find the perfect
-                record for you. <GitHubIcon  href = "www.github.com/emilyrose-13" />
+                record for you.{" "}
+                <GitHubIcon href="www.github.com/emilyrose-13" />
               </Typography>
               <iframe
                 src="https://open.spotify.com/embed/album/6FJxoadUE4JNVwWHghBwnb?utm_source=generator"
@@ -243,41 +235,3 @@ export default function Curators() {
     </div>
   );
 }
-
-/* <container sx={{ flexGrow: 1 }}>
-        <Stack direction="row" spacing={2} margin = {5} >
-
-            <h1>Curators</h1>
-            <ImageAvatars />
-        </Stack>
-        <Container>
-        <Grid container spacing={4} margin= {2}  >
-        <Typography variant="h6" gutterBottom component="div">
-          <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-          <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>    
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            </Typography>
-            </Grid>
-            </Container>
-        <Stack direction="row" spacing={40} indent = {10} margin = {15} >
-            <Typography variant="h6" gutterBottom component="div">
-        Nathan Soum
-        </Typography>
-        <Typography variant="h6" gutterBottom component="div">
-        Tabitha Spencer-Salmon
-        </Typography>
-        <Typography variant="h6" gutterBottom component="div">
-        Chase Stratton
-        </Typography>
-        <Typography variant="h6" gutterBottom component="div">
-        Emily Rose
-        </Typography>
-        </Stack>
-        </container>
-        </div>
-    )
-} */
- 
