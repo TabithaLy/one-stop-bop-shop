@@ -18,6 +18,7 @@ import Vinyls from './pages/Vinyls'
 import SingleProduct from './pages/Records';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Curators from './pages/Curators';
 // import Nav from './components/Nav';
 import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
@@ -71,6 +72,10 @@ function App() {
                 path="/records" 
                 element={<SingleProduct />} 
               />
+              <Route
+                path="/curators"
+                element={<Curators/>}
+                />
               {/* <Route 
                 path="/orderHistory" 
                 element={<OrderHistory />} 
