@@ -126,7 +126,7 @@ function Home() {
       {/* Genre Div */}
       <div>
         <Typography>
-            <h2 align="center"> Shop by Genre </h2>
+            <h2 align="center" sx={{fontFamily: 'monospace', fontWeight: 500}}> Shop by Genre </h2>
         </Typography>
       </div>
       <GenreCards/>

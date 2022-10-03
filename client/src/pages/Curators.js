@@ -77,6 +77,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
             align="center"
             color="text.primary"
             gutterBottom
+            sx={{fontFamily: 'monospace', fontWeight: 600}}
           >
             Our Curators!
           </Typography>
@@ -85,6 +86,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
             align="center"
             color="text.secondary"
             paragraph
+            sx={{mb:4}}
           >
             We are a group of music lovers who have a passion for vinyl records.
             We have a wide range of music tastes and we are always looking for new
@@ -107,6 +109,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   align="center"
                   color="text.primary"
                   gutterBottom
+                  sx={{fontFamily: 'monospace', fontWeight: 600}}
                 >
                   Nathan Soum
                 </Typography>
@@ -116,13 +119,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   color="text.secondary"
                   paragraph
                 >
-                  Nathan is a music lover who has a passion for vinyl records. He
-                  has a wide range of music tastes and is always looking for new
-                  music to listen to. He is here to help you find the perfect
-                  record for you. <GitHubIcon href="www.github.com/nathansoum" />
+                  Nathan is a big music fan who is constantly looking for new styles. He
+                  had the original idea for this store, thinking that people needed a consistent vinyl supplier
+                  with a site that catered to music lovers. <GitHubIcon href="www.github.com/nathansoum" />
                 </Typography>
                 <iframe
-                  src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO216tjq?utm_source=generator"
+                  src="https://open.spotify.com/embed/playlist/1QcsybeUidDJIrPQTHS6dD?utm_source=generator"
                   width="356"
                   height="400"
                   frameborder=""
@@ -140,6 +142,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   align="center"
                   color="text.primary"
                   gutterBottom
+                  sx={{fontFamily: 'monospace', fontWeight: 600}}
                 >
                   Tabitha Spencer-Salmon
                 </Typography>
@@ -156,7 +159,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   <GitHubIcon href="www.github.com/tabitha-salmon" />
                 </Typography>
                 <iframe
-                  src="https://open.spotify.com/embed/album/4sgYpkIASM1jVlNC8Wp9oF?utm_source=generator"
+                  src="https://open.spotify.com/embed/playlist/0IrgXOByxvY2Q0SozycxkR?utm_source=generator"
                   width="356"
                   height="400"
                   frameborder="0"
@@ -174,6 +177,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   align="center"
                   color="text.primary"
                   gutterBottom
+                  sx={{fontFamily: 'monospace', fontWeight: 600}}
                 >
                   Chase Stratton
                 </Typography>
@@ -190,7 +194,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   <GitHubIcon href="www.github.com/chase-stratton" />
                 </Typography>
                 <iframe
-                  src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdyjMX5o2vCq?utm_source=generator"
+                  src="https://open.spotify.com/embed/playlist/5nvSJckENBqAPlZsMagSJa?utm_source=generator"
                   width="356"
                   height="400"
                   frameborder="0"
@@ -208,6 +212,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   align="center"
                   color="text.primary"
                   gutterBottom
+                  sx={{fontFamily: 'monospace', fontWeight: 600}}
                 >
                   Emily Rose
                 </Typography>
