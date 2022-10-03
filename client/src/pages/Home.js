@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';  
 import GenreCards from '../components/GenreCards';
 import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -73,12 +74,11 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
   transition: theme.transitions.create('opacity'),
 }));
 
-
-
-
 function Home() {
+  const navigate = useNavigate();
   const handleBannerClick = () => {
-    window.location.assign('/vinyls')
+    navigate("/vinyls");
+    
   }
 
   return (
