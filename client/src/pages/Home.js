@@ -12,15 +12,11 @@ function Home() {
 
   return (
     <>
-    {Auth.loggedIn() ? (
-      <h1>logged in</h1>
-    ) :
-    null}
     <Box sx={{ flexGrow: 1 }}>
       {/* Banner */}
       <Grid container>
         <Grid item xs={12} md={12}>
-          <img className="banner" src={Banner} alt="store banner" />
+          <img className="banner" src='https://res.cloudinary.com/daheygjio/image/upload/v1664744849/albumcovers/6883469F-830F-48D0-A6D3-18360A281745_1_201_a_ruuhzb.jpg' alt="store banner"/>
         </Grid>
       </Grid>
       {/* Close Banner */}

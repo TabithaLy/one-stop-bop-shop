@@ -18,10 +18,12 @@ import Vinyls from './pages/Vinyls'
 import SingleProduct from './pages/Records';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Curators from './pages/Curators';
 // import Nav from './components/Nav';
 import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -71,6 +73,10 @@ function App() {
                 path="/vinyls/:_id" 
                 element={<SingleProduct />} 
               />
+              <Route
+                path="/curators"
+                element={<Curators/>}
+                />
               {/* <Route 
                 path="/orderHistory" 
                 element={<OrderHistory />} 

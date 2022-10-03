@@ -8,7 +8,8 @@ import {
   UPDATE_GENRES,
   UPDATE_CURRENT_GENRE,
   CLEAR_CART,
-  TOGGLE_CART
+  TOGGLE_CART,
+  UPDATE_SEARCH
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -78,6 +79,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         currentGenre: action.currentGenre
+      };
+    case UPDATE_SEARCH:
+      return {
+        ...state,
+        search: action.search
       }
 
     default:

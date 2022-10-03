@@ -1,6 +1,6 @@
 :root {
     --tan-orange: #eda96c;
-    --bright-orange: ##ec703d;
+    --bright-orange: #ec703d;
     --orange: #d83c23;
     --dark-blue: #0e2b55;
     --blue-3: #1d6e8c;
@@ -52,12 +52,13 @@
 .footer-distributed .footer-links a {
   display: inline-block;
   font-weight: 400;
+  margin-right: 8px;
   text-decoration: none;
   color: inherit;
 }
 
 .footer-distributed .footer-company-name {
-  color: #222;
+  color: #c2ced2;
   font-size: 14px;
   font-weight: normal;
   margin: 0;
@@ -103,7 +104,12 @@
 }
 
 .footer-distributed .footer-center p a {
-  color: lightseagreen;
+  color: var(--tan-orange);
+  text-decoration: none;
+}
+
+.footer-distributed .footer-center p a:hover {
+  color: var(--cream);
   text-decoration: none;
 }
 
@@ -129,7 +135,7 @@
 
 .footer-distributed .footer-company-about {
   line-height: 20px;
-  color: #92999f;
+  color: #c2ced2;
   font-size: 13px;
   font-weight: normal;
   margin: 0;
@@ -159,7 +165,7 @@
   text-align: center;
   line-height: 35px;
 
-  margin-right: 3px;
+  margin-right: 10px;
   margin-bottom: 5px;
 }
 

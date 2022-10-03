@@ -12,11 +12,14 @@ function Footer () {
 				<h3>One Stop Bop Shop</h3>
 
 				<p class="footer-links">
-					<a href="/" class="link-1">Home</a>
+					<a href="/" class="link-1">Home </a>
 					
-					<a href="/vinyls">Products</a>
+					<a href="/vinyls">Products </a>
+
+					<a href="/curators">About </a>
 					
-					<a href="#">Contact</a>
+					<a href="mailto:support@company.com">Contact</a>
+
 				</p>
 
 				<p class="footer-company-name">One Stop Bop Shop © 2015</p>
@@ -52,7 +55,7 @@ function Footer () {
 
                     <SocialIcon url="https://facebook.com/" bgColor='#fff'/>
                     <SocialIcon url="https://twitter.com/" bgColor='#fff'/>
-                    <SocialIcon url="https://github.com/" bgColor='#fff'/>
+                    <SocialIcon url="https://github.com/TabithaLy/one-stop-bop-shop" bgColor='#fff'/>
 
 				</div>
 
