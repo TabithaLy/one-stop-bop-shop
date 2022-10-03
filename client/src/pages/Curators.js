@@ -72,7 +72,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   export default function Curators() {
     return (
       <div>
-        <ImageAvatars />
         <Container justify="center" align="center">
           <Typography
             variant="h4"
@@ -97,8 +96,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
             container
             spacing={1}
             direction="row"
-            justifyContent="left"
-            alignItems="left"
+            justifyContent="space-around"
+            alignItems="center"
           >
             <Grid item xs={12} sm={7} md={5}>
               <Paper
@@ -127,7 +126,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                 <iframe
                   src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO216tjq?utm_source=generator"
                   width="356"
-                  height="500"
+                  height="400"
                   frameborder=""
                   allowtransparency="true"
                   allow="encrypted-media"
@@ -162,7 +161,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                 <iframe
                   src="https://open.spotify.com/embed/album/4sgYpkIASM1jVlNC8Wp9oF?utm_source=generator"
                   width="356"
-                  height="500"
+                  height="400"
                   frameborder="0"
                   allowtransparency="true"
                   allow="encrypted-media"
@@ -197,7 +196,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                 <iframe
                   src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdyjMX5o2vCq?utm_source=generator"
                   width="356"
-                  height="500"
+                  height="400"
                   frameborder="0"
                   allowtransparency="true"
                   allow="encrypted-media"
@@ -232,7 +231,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                 <iframe
                   src="https://open.spotify.com/embed/album/6FJxoadUE4JNVwWHghBwnb?utm_source=generator"
                   width="356"
-                  height="500"
+                  height="400"
                   frameborder="0"
                   allowtransparency="true"
                   allow="encrypted-media"
