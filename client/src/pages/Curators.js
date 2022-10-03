@@ -51,16 +51,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 
 
-  function ImageAvatars() {
-    return (
-      <Stack direction="auto" spacing={50}>
-        <Avatar alt="Nathan Soum" src="/static/images/avatar/1.jpg" />
-        <Avatar alt="Tabitha Spencer-Salmon" src="/static/images/avatar/2.jpg" />
-        <Avatar alt="Chase Stratton" src="/static/images/avatar/3.jpg" />
-        <Avatar alt="Emily Rose" src="/static/images/avatar/4.jpg" />
-      </Stack>
-    );
-  }
 
 // below is the start of the Curators page that includes the Curators component and the Curators component is the one that has the avatars and the badges and the github icons and the names of the curators and the description of the curators and iframe that shows the github profile of the curators.
 // iframe is used to show the curators playlist on the page.
@@ -121,7 +111,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                 >
                   Nathan is a big music fan who is constantly looking for new styles. He
                   had the original idea for this store, thinking that people needed a consistent vinyl supplier
-                  with a site that catered to music lovers. <GitHubIcon href="www.github.com/nathansoum" />
+                  with a site that catered to music lovers. <a href="https://www.github.com/nathansoum"><GitHubIcon /></a>
                 </Typography>
                 <iframe
                   src="https://open.spotify.com/embed/playlist/1QcsybeUidDJIrPQTHS6dD?utm_source=generator"
@@ -156,7 +146,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   She has a wide range of music tastes and is always looking for
                   new music to listen to. She is here to help you find the perfect
                   record for you.{" "}
-                  <GitHubIcon href="www.github.com/tabitha-salmon" />
+                  <a href="https://github.com/TabithaLy"><GitHubIcon/> </a>
                 </Typography>
                 <iframe
                   src="https://open.spotify.com/embed/playlist/0IrgXOByxvY2Q0SozycxkR?utm_source=generator"
@@ -191,7 +181,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   has a wide range of music tastes and is always looking for new
                   music to listen to. He is here to help you find the perfect
                   record for you.{" "}
-                  <GitHubIcon href="www.github.com/chase-stratton" />
+                  <GitHubIcon href="https://www.github.com/chase-stratton" />
                 </Typography>
                 <iframe
                   src="https://open.spotify.com/embed/playlist/5nvSJckENBqAPlZsMagSJa?utm_source=generator"
@@ -224,7 +214,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                 >
                   Emily is a concert fanatic with a passion for finding new favorite artists, both big and small. 
                   Though she thrives most on indie and surf rock, her concert-going history includes just about every genre under the sun.{" "}
-                  <GitHubIcon href="www.github.com/emilyerose" />
+                  <a href="https://www.github.com/emilyerose"><GitHubIcon/> </a>
                 </Typography>
                 <iframe
                   src="https://open.spotify.com/embed/playlist/6f4bYfMPonkBq7IHKSkAFY"

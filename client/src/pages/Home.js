@@ -2,8 +2,6 @@ import '../index.css';
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from '@mui/material';
-import Banner from "../assets/images/banner.png";
-import Auth from "../utils/auth";
 import React from 'react';
 import GenreCards from '../components/GenreCards';
 import { styled } from '@mui/material/styles';

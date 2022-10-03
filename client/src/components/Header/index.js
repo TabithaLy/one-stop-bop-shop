@@ -24,6 +24,7 @@ import './style.css';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 //import Autocomplete from '@mui/material/Autocomplete';
+import {Link} from 'react-router-dom'
 
 import CartItem from '../CartItem';
 import { useStoreContext } from '../../utils/GlobalState';
@@ -325,7 +326,7 @@ const Header = () => {
                                     </MenuItem>
                                 ))) : (<MenuItem key='amLoggedOut' onClick= {() => {handleCloseUserMenu('amLoggedOut')}}>
                                         <Typography textAlign="center">You are not logged in. <br></br>
-                                        <a href='/login'>Sign In</a> to view your account.</Typography>
+                                        <Link to='/login'>Sign In</Link> to view your account.</Typography>
                                     </MenuItem>)}
                             </Menu>
 
@@ -367,7 +368,7 @@ const Header = () => {
                                             {Auth.loggedIn() ? (
                                             <Button variant="text"  color="inherit" sx={{mx: 2}} onClick={submitCheckout}>Checkout</Button>
                                             ) : (
-                                            <Typography sx={{mx:3}}><a href='/login'>Sign In</a> To Check Out.</Typography>
+                                            <Typography sx={{mx:3}}><Link to='/login'>Sign In</Link> To Check Out.</Typography>
                                             )}
                                         
                                     </Grid>

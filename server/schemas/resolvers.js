@@ -58,7 +58,7 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     checkout: async (parent, args, context) => {
-      const url = 'http://localhost:3000';
+      const url = new URL(context.headers.referer).origin;
       //const imgurl = new URL("https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/")
       const order = new Order({ vinyls: args.vinyls });
       const line_items = [];
