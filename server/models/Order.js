@@ -9,7 +9,7 @@ const orderSchema = new Schema({
     default: Date.now
   },
   // Order can contain one or more products
-  vinyl: [
+  vinyls: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Vinyl'

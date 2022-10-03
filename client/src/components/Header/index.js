@@ -159,6 +159,7 @@ const Header = () => {
           vinylIds.push(item._id);
         }
       });
+      console.log(vinylIds)
       getCheckout({
         variables: { vinyls: vinylIds },
       });
