@@ -17,6 +17,7 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "react-social-icons": "^5.14.0"
+    "react-social-icons": "^5.14.0",
+    "styled-components": "^5.3.6"
   }
 }

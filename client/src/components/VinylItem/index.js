@@ -59,23 +59,6 @@ function VinylItem(item) {
     </div>
   );
 
-
-  // return (
-  //   <Link to {`/vinyls/${_id}`}>
-  //     <img sx={{ width: 500, height: 450 }}
-  //     alt={image}
-  //     src={`https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/${image}`}
-  //     />
-  //     <p>{title}</p>
-  //   </Link>
-  //   <div>
-  //     <div>{artist}</div>
-  //     <span>${price}</span>
-  //     </div>
-  //     <button onClick={addToCart}>Add to cart</button>
-  //   </div>
-  // )
-
 }
 
 export default VinylItem;

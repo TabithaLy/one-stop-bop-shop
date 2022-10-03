@@ -92,8 +92,8 @@ export const QUERY_ALL_VINYLS = gql`
 `;
 
 export const QUERY_BY_ID = gql`
-  query getVinyls($id: ID!) {
-    vinyl(id: $id) {
+  query getVinyls($_id: ID!) {
+    vinyl(_id: $_id) {
         _id
         title
         artist
@@ -107,3 +107,4 @@ export const QUERY_BY_ID = gql`
     }
   }
 `;
+

@@ -1,12 +1,36 @@
-import React from "react";
+import "./index.css";
+import React, { useEffect } from "react";
+import { QUERY_BY_ID } from "../../utils/queries";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+
 
 function SingleProduct() {
+  const { _id } = useParams();
+  const { loading, error, data } = useQuery(QUERY_BY_ID, {
+    variables: { _id },
+  });
 
-    return (
+  useEffect(() => {
+    if (data) {
+      console.log("=====data====", data);
+    }
+  }, [data]);
 
-        <h1>are we here</h1>
-    );
-
+  return (
+    <div className="container">
+      <div className="wrapper">
+        <div className="image-container">
+          <img className="image" alt="album cover" src={`https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/${data.vinyl.image}`} />
+        </div>
+        <div className="info-container">
+            <h1>{data.vinyl.title}</h1>
+            <span className="price">{data.vinyl.price}</span>
+            <button className="button">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default SingleProduct
+export default SingleProduct;
