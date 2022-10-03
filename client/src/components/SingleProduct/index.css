@@ -8,7 +8,8 @@
 }
 
 img {
-    width: 1000px;
+    width: 100%;
+    border: 2px solid black;
 }
 
 .info-container {
@@ -28,7 +29,7 @@ img {
 .button {
     padding: 15px;
     border: 2px solid black;
-    background-color: white;
+    background-color: #1D6E8C;
     cursor: pointer;
     font-weight: 500;
 }
