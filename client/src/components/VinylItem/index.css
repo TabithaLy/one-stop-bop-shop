@@ -1,0 +1,28 @@
+* {
+    font-family: 'Kanit', sans-serif;
+
+}
+
+.container {
+    height: auto;
+}
+
+.vinyl-img {
+    border: 2px solid;
+    border-color: black;
+    width: inherit;
+}
+
+button {
+    background-color: #1D6E8C;
+    color: #fff;
+}
+
+.vinyl-title {
+    color: #000;
+}
+
+.vinyl-info {
+    margin-top: -17px;
+}
+

@@ -1,3 +1,4 @@
+import './index.css'
 import React from "react";
 import { Link } from "react-router-dom";
 import { pluralize } from "../../utils/helpers"
@@ -41,17 +42,17 @@ function VinylItem(item) {
   }
 
   return (
-    <div className="card px-1 py-1">
-      <Link to={`/vinyls/${_id}`}>
-        <img
-          style={{ height: "auto", width: 400 }}
+    <div className='container'>
+      <Link to={`/vinyls/${_id}`}  style={{textDecoration: 'none'}}>
+        <img className='vinyl-img'
+          style={{ height: "auto", width: 300 }}
           alt={image}
           src={`https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/${image}`}
         />
-        <p>{title}</p>
+        <p className="vinyl-title"><strong>{title}</strong></p>
       </Link>
-      <div>
-        <div>{artist}</div>
+      <div className='vinyl-info'>
+        <div>By: {artist}</div>
         <span>${price}</span>
       </div>
       <button onClick={addToCart}>Add to cart</button>
