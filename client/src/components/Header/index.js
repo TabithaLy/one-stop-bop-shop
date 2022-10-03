@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MenuList from '@mui/material/MenuList';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import CartIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -26,6 +25,7 @@ import './style.css';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 import Autocomplete from '@mui/material/Autocomplete';
+
 
 
 import CartItem from '../CartItem';
@@ -320,7 +320,7 @@ const Header = () => {
                         <Tooltip title="Open Cart">
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleOpenCartMenu}>
                                 <Badge badgeContent={state.cart.length} color="error">
-                                    <CartIcon />
+                                    <CartIcon/>
                                 </Badge>
                                 </IconButton>
                         </Tooltip>
@@ -346,13 +346,13 @@ const Header = () => {
                                 >
                                     <Grid item >
                                         
-                                            <Typography sx={{ mx: 1 }}>Total: ${calculateTotal()} </Typography>
+                                            <Typography sx={{ mx: 3 }}>Total: ${calculateTotal()} </Typography>
                                         
                                     </Grid>
                                     <Grid item >
                                         
                                             {Auth.loggedIn() ? (
-                                            <Button variant="text"  onClick={submitCheckout}>Checkout</Button>
+                                            <Button variant="text"  color="inherit" sx={{mx: 2}} onClick={submitCheckout}>Checkout</Button>
                                             ) : (
                                             <Typography>Log in to check out</Typography>
                                             )}
