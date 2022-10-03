@@ -19,9 +19,10 @@ import SingleProduct from './pages/Records';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Curators from './pages/Curators';
+import CartPage from './pages/CartPage';
 // import Nav from './components/Nav';
 import { StoreProvider } from './utils/GlobalState';
-// import Success from './pages/Success';
+import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
 
 
@@ -77,6 +78,14 @@ function App() {
                 path="/curators"
                 element={<Curators/>}
                 />
+              <Route
+                path="/cart"
+                element={<CartPage/>}
+                />
+              <Route 
+                path="/success" 
+                element={<Success />} 
+              />
               {/* <Route 
                 path="/orderHistory" 
                 element={<OrderHistory />} 

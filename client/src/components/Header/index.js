@@ -13,7 +13,6 @@ import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import AlbumIcon from '@mui/icons-material/Album';
 import Badge from '@mui/material/Badge';
 import InputBase from '@mui/material/InputBase';
@@ -24,9 +23,7 @@ import Auth from '../../utils/auth';
 import './style.css';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
-import Autocomplete from '@mui/material/Autocomplete';
-
-
+//import Autocomplete from '@mui/material/Autocomplete';
 
 import CartItem from '../CartItem';
 import { useStoreContext } from '../../utils/GlobalState';
@@ -98,10 +95,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
-const pages = ['Shopping Cart', 'Search'];
-const userPages = ['Signup', 'Login']
-const settings = ['Account', 'Dashboard', 'Logout'];
+const stripePromise = loadStripe('pk_test_51LoYXUIP0IqlLShQslIZGl82nBgTpuVEpuK1o3mB0RThvXdFseFdvBSyl5T3U06lxlZkon7D8aANUEXy8Va44FJj00sVuGhVib');
+
+const settings = ['Account', 'Cart', 'Logout'];
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -112,8 +108,8 @@ const Header = () => {
     const { userdata } = useQuery(QUERY_USER);
     let user;
     const [state, dispatch] = useStoreContext();
-    const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-  
+    const [getCheckout, { data, error }] = useLazyQuery(QUERY_CHECKOUT);
+    if (error) {console.log(error)}
     // We check to see if there is a data object that exists, if so this means that a checkout session was returned from the backend
     // Then we should redirect to the checkout with a reference to our session id
     useEffect(() => {
@@ -201,8 +197,15 @@ const Header = () => {
             console.log("CALLING LOGOUT")
             Auth.logout();
         }
+        else if (setting=== "Cart") {
+            window.location.assign('/cart')
+        }
         setAnchorElUser(null);
     };
+
+    const handleSearchChange = (event) => {
+        setAutocompleteInputValue(event.target.value);
+    }
 
     const handleSearch = (searchString) => {
         dispatch({
@@ -275,16 +278,24 @@ const Header = () => {
                                 <SearchIconWrapper>
                                     <SearchIcon />
                                 </SearchIconWrapper>
-                                <Autocomplete
+                                {/* <Autocomplete
                                     id="search"
                                     inputValue={autocompleteInputValue}
                                     onInputChange={(event, newInputValue) => {
                                     setAutocompleteInputValue(newInputValue);
+                                    console.log(autocompleteInputValue)
                                     }}
                                     freeSolo
                                     options={['daf','dafskj','weori']}
                                     renderInput={(params) => <StyledInputBase {...params} placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />}
-                                    />
+                                    /> */}
+                                <StyledInputBase id="search"
+                                    placeholder="Search…" inputProps={{ 'aria-label': 'search' }}
+                                    value={autocompleteInputValue}
+                                    onChange={handleSearchChange}
+                                    >
+
+                                    </StyledInputBase>
                             </Search>
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open User Menu">

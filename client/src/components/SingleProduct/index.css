@@ -5,25 +5,32 @@
 
 .image-container {
     flex: 1;
+    margin-left: 150px
 }
 
 img {
-    width: 100%;
+    width: 300px;
     border: 2px solid black;
 }
 
 .info-container {
     flex: 1;
-    padding: 0px 50px;
+    padding: 0px 30px;
 }
 
 .title {
     font-weight: 200;
 }
 
-.price {
+.artist {
     font-weight: 100;
     font-size: 40px;
+}
+
+.price {
+    font-weight: 100;
+    font-size: 30px;
+    color: gray
 }
 
 .button {
@@ -32,4 +39,5 @@ img {
     background-color: #1D6E8C;
     cursor: pointer;
     font-weight: 500;
+    font-family: monospace;
 }

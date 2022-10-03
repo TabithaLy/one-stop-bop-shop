@@ -26,6 +26,7 @@ export const ADD_ORDER = gql`
         quantity
         genres {
           name
+          _id
         }
       }
     }
