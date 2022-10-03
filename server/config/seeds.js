@@ -843,7 +843,7 @@ db.once("open", async () => {
     password: "passwordtest1",
     orders: [
       {
-        vinyl: [vinyl[0]._id, vinyl[0]._id, vinyl[1]._id],
+        vinyls: [vinyl[0]._id, vinyl[0]._id, vinyl[1]._id],
       },
     ],
   });
@@ -859,3 +859,4 @@ db.once("open", async () => {
 
   process.exit();
 });
+

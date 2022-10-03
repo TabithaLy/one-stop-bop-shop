@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500&family=Noto+Sans:wght@300&display=swap');
+
 * {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
 
 }
 
@@ -16,6 +18,7 @@
 button {
     background-color: #1D6E8C;
     color: #fff;
+    padding: 3px;
 }
 
 .vinyl-title {

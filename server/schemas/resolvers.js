@@ -59,31 +59,30 @@ const resolvers = {
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const imgurl = new URL("https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/")
+      //const imgurl = new URL("https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/")
       const order = new Order({ vinyls: args.vinyls });
       const line_items = [];
-      console.log(order)
       const { vinyls } = await order.populate('vinyls');
-
       for (let i = 0; i < vinyls.length; i++) {
-        const vinyl = await stripe.vinyls.create({
-          title: vinyls[i].title,
-          artist: vinyls[i].artist,
-          images: [`${url}${vinyls[i].image}`]
+        
+        const vinyl = await stripe.products.create({
+          name: vinyls[i].title,
+          description: vinyls[i].artist,
+          //images: [`${url}${vinyls[i].image}`]
         });
 
         const price = await stripe.prices.create({
-          vinyl: vinyl.id,
+          product: vinyl.id,
           unit_amount: vinyls[i].price * 100,
           currency: 'usd',
         });
-
+        console.log('price is',price)
         line_items.push({
           price: price.id,
           quantity: 1
         });
       }
-      
+      console.log('line', line_items)
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items,

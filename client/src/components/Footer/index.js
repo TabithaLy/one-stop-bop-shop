@@ -1,6 +1,7 @@
 import './index.css'
 import React from 'react';
 import { SocialIcon } from 'react-social-icons';
+import { Link } from 'react-router-dom';
 
 function Footer () {
     return (
@@ -12,13 +13,13 @@ function Footer () {
 				<h3>One Stop Bop Shop</h3>
 
 				<p class="footer-links">
-					<a href="/" class="link-1">Home </a>
+					<Link to="/" class="links-a">Home </Link>
 					
-					<a href="/vinyls">Products </a>
+					<Link to="/vinyls" class="links-a">Products </Link>
 
-					<a href="/curators">About </a>
+					<Link to="/curators" class="links-a">About </Link>
 					
-					<a href="mailto:support@company.com">Contact</a>
+					<a href="mailto:support@company.com" class="links-a">Contact</a>
 
 				</p>
 
@@ -39,7 +40,7 @@ function Footer () {
 
 				<div>
 					<i class="fa fa-envelope"></i>
-					<p><a href="mailto:support@company.com">support@onestopbopshop.com</a></p>
+					<p><a class = "links-a" href="mailto:support@company.com">support@onestopbopshop.com</a></p>
 				</div>
 
 			</div>

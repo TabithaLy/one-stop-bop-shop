@@ -8,7 +8,6 @@ import { Box, Container } from "@mui/system";
 import { Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Grid } from "@mui/material";
-import { Paper } from "@mui/material";
 
 
 
@@ -16,7 +15,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       backgroundColor: "#44b700",
       color: "#44b700",
-      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      boxShadow: `0 0 0 2px ${theme.palette.background.Box}`,
       "&::after": {
         position: "absolute",
         top: 0,
@@ -47,21 +46,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   const SmallAvatar = styled(Avatar)(({ theme }) => ({
     width: 22,
     height: 22,
-    border: `2px solid ${theme.palette.background.paper}`,
+    border: `2px solid ${theme.palette.background.Box}`,
   }));
 
 
 
-  function ImageAvatars() {
-    return (
-      <Stack direction="auto" spacing={50}>
-        <Avatar alt="Nathan Soum" src="/static/images/avatar/1.jpg" />
-        <Avatar alt="Tabitha Spencer-Salmon" src="/static/images/avatar/2.jpg" />
-        <Avatar alt="Chase Stratton" src="/static/images/avatar/3.jpg" />
-        <Avatar alt="Emily Rose" src="/static/images/avatar/4.jpg" />
-      </Stack>
-    );
-  }
 
 // below is the start of the Curators page that includes the Curators component and the Curators component is the one that has the avatars and the badges and the github icons and the names of the curators and the description of the curators and iframe that shows the github profile of the curators.
 // iframe is used to show the curators playlist on the page.
@@ -72,12 +61,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   export default function Curators() {
     return (
       <div>
-        <Container justify="center" align="center">
+        <Container sx={{m:5}} justify="center" align="center">
           <Typography
             variant="h4"
             align="center"
             color="text.primary"
             gutterBottom
+            sx={{fontFamily: 'monospace', fontWeight: 600}}
           >
             Our Curators!
           </Typography>
@@ -86,6 +76,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
             align="center"
             color="text.secondary"
             paragraph
+            sx={{mb:4}}
           >
             We are a group of music lovers who have a passion for vinyl records.
             We have a wide range of music tastes and we are always looking for new
@@ -94,14 +85,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
           </Typography>
           <Grid
             container
-            spacing={1}
+            spacing={4}
             direction="row"
             justifyContent="space-around"
             alignItems="center"
           >
             <Grid item xs={12} sm={7} md={5}>
-              <Paper
-                elevation={3}
+              <Box
                 sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}
               >
                 <Typography
@@ -109,33 +99,32 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   align="center"
                   color="text.primary"
                   gutterBottom
+                  sx={{fontFamily: 'monospace', fontWeight: 600}}
                 >
                   Nathan Soum
                 </Typography>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   align="center"
                   color="text.secondary"
                   paragraph
                 >
-                  Nathan is a music lover who has a passion for vinyl records. He
-                  has a wide range of music tastes and is always looking for new
-                  music to listen to. He is here to help you find the perfect
-                  record for you. <GitHubIcon href="www.github.com/nathansoum" />
+                  Nathan is a big music fan who is constantly looking for new styles. He
+                  had the original idea for this store, thinking that people needed a consistent vinyl supplier
+                  with a site that catered to music lovers. <a href="https://www.github.com/nathansoum"><GitHubIcon /></a>
                 </Typography>
                 <iframe
-                  src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO216tjq?utm_source=generator"
+                  src="https://open.spotify.com/embed/playlist/1QcsybeUidDJIrPQTHS6dD?utm_source=generator"
                   width="356"
                   height="400"
                   frameborder=""
                   allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
-              </Paper>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={7} md={5}>
-              <Paper
-                elevation={3}
+              <Box
                 sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}
               >
                 <Typography
@@ -143,11 +132,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   align="center"
                   color="text.primary"
                   gutterBottom
+                  sx={{fontFamily: 'monospace', fontWeight: 600}}
                 >
                   Tabitha Spencer-Salmon
                 </Typography>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   align="center"
                   color="text.secondary"
                   paragraph
@@ -156,21 +146,20 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   She has a wide range of music tastes and is always looking for
                   new music to listen to. She is here to help you find the perfect
                   record for you.{" "}
-                  <GitHubIcon href="www.github.com/tabitha-salmon" />
+                  <a href="https://github.com/TabithaLy"><GitHubIcon/> </a>
                 </Typography>
                 <iframe
-                  src="https://open.spotify.com/embed/album/4sgYpkIASM1jVlNC8Wp9oF?utm_source=generator"
+                  src="https://open.spotify.com/embed/playlist/0IrgXOByxvY2Q0SozycxkR?utm_source=generator"
                   width="356"
                   height="400"
                   frameborder="0"
                   allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
-              </Paper>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={7} md={5}>
-              <Paper
-                elevation={3}
+              <Box
                 sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}
               >
                 <Typography
@@ -178,11 +167,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   align="center"
                   color="text.primary"
                   gutterBottom
+                  sx={{fontFamily: 'monospace', fontWeight: 600}}
                 >
                   Chase Stratton
                 </Typography>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   align="center"
                   color="text.secondary"
                   paragraph
@@ -191,21 +181,20 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   has a wide range of music tastes and is always looking for new
                   music to listen to. He is here to help you find the perfect
                   record for you.{" "}
-                  <GitHubIcon href="www.github.com/chase-stratton" />
+                  <GitHubIcon href="https://www.github.com/chase-stratton" />
                 </Typography>
                 <iframe
-                  src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdyjMX5o2vCq?utm_source=generator"
+                  src="https://open.spotify.com/embed/playlist/5nvSJckENBqAPlZsMagSJa?utm_source=generator"
                   width="356"
                   height="400"
                   frameborder="0"
                   allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
-              </Paper>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={7} md={5}>
-              <Paper
-                elevation={3}
+              <Box
                 sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}
               >
                 <Typography
@@ -213,30 +202,29 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   align="center"
                   color="text.primary"
                   gutterBottom
+                  sx={{fontFamily: 'monospace', fontWeight: 600}}
                 >
                   Emily Rose
                 </Typography>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   align="center"
                   color="text.secondary"
                   paragraph
                 >
-                  Emily is a music lover who has a passion for vinyl records. She
-                  has a wide range of music tastes and is always looking for new
-                  music to listen to. She is here to help you find the perfect
-                  record for you.{" "}
-                  <GitHubIcon href="www.github.com/emilyrose-13" />
+                  Emily is a concert fanatic with a passion for finding new favorite artists, both big and small. 
+                  Though she thrives most on indie and surf rock, her concert-going history includes just about every genre under the sun.{" "}
+                  <a href="https://www.github.com/emilyerose"><GitHubIcon/> </a>
                 </Typography>
                 <iframe
-                  src="https://open.spotify.com/embed/album/6FJxoadUE4JNVwWHghBwnb?utm_source=generator"
+                  src="https://open.spotify.com/embed/playlist/6f4bYfMPonkBq7IHKSkAFY"
                   width="356"
                   height="400"
                   frameborder="0"
                   allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
-              </Paper>
+              </Box>
             </Grid>
           </Grid>
         </Container>

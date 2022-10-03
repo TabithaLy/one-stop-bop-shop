@@ -103,17 +103,17 @@
   line-height: 2;
 }
 
-.footer-distributed .footer-center p a {
+.footer-distributed .footer-center .links-a {
   color: var(--tan-orange);
   text-decoration: none;
 }
 
-.footer-distributed .footer-center p a:hover {
+.footer-distributed .footer-center .links-a:hover {
   color: var(--cream);
   text-decoration: none;
 }
 
-.footer-distributed .footer-links a:before {
+.footer-distributed .footer-links .links-a:before {
   content: "|";
   font-weight: 300;
   font-size: 20px;

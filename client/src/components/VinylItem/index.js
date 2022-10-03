@@ -1,7 +1,6 @@
 import './index.css'
 import React from "react";
 import { Link } from "react-router-dom";
-import { pluralize } from "../../utils/helpers"
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
@@ -45,14 +44,14 @@ function VinylItem(item) {
     <div className='container'>
       <Link to={`/vinyls/${_id}`}  style={{textDecoration: 'none'}}>
         <img className='vinyl-img'
-          style={{ height: "auto", width: 300 }}
+          style={{ height: "auto", width: '100%' }}
           alt={image}
           src={`https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/${image}`}
         />
-        <p className="vinyl-title"><strong>{title}</strong></p>
+        <p className="vinyl-title">{title.toUpperCase()} </p>
       </Link>
       <div className='vinyl-info'>
-        <div>By: {artist}</div>
+        <div>{artist}</div>
         <span>${price}</span>
       </div>
       <button onClick={addToCart}>Add to cart</button>
