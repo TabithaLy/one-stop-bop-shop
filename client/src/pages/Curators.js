@@ -8,7 +8,6 @@ import { Box, Container } from "@mui/system";
 import { Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Grid } from "@mui/material";
-import { Paper } from "@mui/material";
 
 
 
@@ -16,7 +15,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       backgroundColor: "#44b700",
       color: "#44b700",
-      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      boxShadow: `0 0 0 2px ${theme.palette.background.Box}`,
       "&::after": {
         position: "absolute",
         top: 0,
@@ -47,7 +46,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   const SmallAvatar = styled(Avatar)(({ theme }) => ({
     width: 22,
     height: 22,
-    border: `2px solid ${theme.palette.background.paper}`,
+    border: `2px solid ${theme.palette.background.Box}`,
   }));
 
 
@@ -72,7 +71,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   export default function Curators() {
     return (
       <div>
-        <Container justify="center" align="center">
+        <Container sx={{m:5}} justify="center" align="center">
           <Typography
             variant="h4"
             align="center"
@@ -94,14 +93,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
           </Typography>
           <Grid
             container
-            spacing={1}
+            spacing={4}
             direction="row"
             justifyContent="space-around"
             alignItems="center"
           >
             <Grid item xs={12} sm={7} md={5}>
-              <Paper
-                elevation={3}
+              <Box
                 sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}
               >
                 <Typography
@@ -113,7 +111,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   Nathan Soum
                 </Typography>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   align="center"
                   color="text.secondary"
                   paragraph
@@ -131,11 +129,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
-              </Paper>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={7} md={5}>
-              <Paper
-                elevation={3}
+              <Box
                 sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}
               >
                 <Typography
@@ -147,7 +144,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   Tabitha Spencer-Salmon
                 </Typography>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   align="center"
                   color="text.secondary"
                   paragraph
@@ -166,11 +163,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
-              </Paper>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={7} md={5}>
-              <Paper
-                elevation={3}
+              <Box
                 sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}
               >
                 <Typography
@@ -182,7 +178,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   Chase Stratton
                 </Typography>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   align="center"
                   color="text.secondary"
                   paragraph
@@ -201,11 +197,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
-              </Paper>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={7} md={5}>
-              <Paper
-                elevation={3}
+              <Box
                 sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}
               >
                 <Typography
@@ -217,26 +212,24 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                   Emily Rose
                 </Typography>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   align="center"
                   color="text.secondary"
                   paragraph
                 >
-                  Emily is a music lover who has a passion for vinyl records. She
-                  has a wide range of music tastes and is always looking for new
-                  music to listen to. She is here to help you find the perfect
-                  record for you.{" "}
-                  <GitHubIcon href="www.github.com/emilyrose-13" />
+                  Emily is a concert fanatic with a passion for finding new favorite artists, both big and small. 
+                  Though she thrives most on indie and surf rock, her concert-going history includes just about every genre under the sun.{" "}
+                  <GitHubIcon href="www.github.com/emilyerose" />
                 </Typography>
                 <iframe
-                  src="https://open.spotify.com/embed/album/6FJxoadUE4JNVwWHghBwnb?utm_source=generator"
+                  src="https://open.spotify.com/embed/playlist/6f4bYfMPonkBq7IHKSkAFY"
                   width="356"
                   height="400"
                   frameborder="0"
                   allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
-              </Paper>
+              </Box>
             </Grid>
           </Grid>
         </Container>

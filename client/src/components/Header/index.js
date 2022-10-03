@@ -211,11 +211,9 @@ const Header = () => {
         });
       };
 
-    if (Auth.loggedIn()) {
-        
         return (
             <ThemeProvider theme={theme}>
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <AlbumIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -310,11 +308,14 @@ const Header = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
+                                {Auth.loggedIn() ? (settings.map((setting) => (
                                     <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </MenuItem>
-                                ))}
+                                ))) : (<MenuItem key='amLoggedOut' onClick= {() => {handleCloseUserMenu('amLoggedOut')}}>
+                                        <Typography textAlign="center">You are not logged in. <br></br>
+                                        <a href='/login'>Sign In</a> to view your account.</Typography>
+                                    </MenuItem>)}
                             </Menu>
 
 
@@ -355,7 +356,7 @@ const Header = () => {
                                             {Auth.loggedIn() ? (
                                             <Button variant="text"  color="inherit" sx={{mx: 2}} onClick={submitCheckout}>Checkout</Button>
                                             ) : (
-                                            <Typography>Log in to check out</Typography>
+                                            <Typography sx={{mx:3}}><a href='/login'>Sign In</a> To Check Out.</Typography>
                                             )}
                                         
                                     </Grid>
@@ -363,9 +364,9 @@ const Header = () => {
                                 
                                 </div>
                             ) : (
-                                <h3>
+                                <Typography variant="subtitle1" sx={{mx:3}}>
                                 You haven't added anything to your cart yet!
-                                </h3>
+                                </Typography>
                             )}
                         </Menu>
 
@@ -375,148 +376,6 @@ const Header = () => {
             </AppBar>
             </ThemeProvider>
         );
-    } else {
-        return ((
-            <ThemeProvider theme={theme}>
-            <AppBar position="static">
-                <Container maxWidth="xl">
-                    <Toolbar disableGutters>
-                        <AlbumIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="a"
-                            href="/"
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            One Stop Bop Shop
-                        </Typography>
-
-                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleOpenNavMenu}
-                                color="inherit"
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none' },
-                                }}
-                            >
-                                {userPages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                                </Menu>
-                        </Box>
-                        <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                        <Typography
-                            variant="h5"
-                            noWrap
-                            component="a"
-                            href=""
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'flex', md: 'none' },
-                                flexGrow: 1,
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            LOGO
-                        </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            {userPages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
-                                    href={page}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
-                        </Box>
-                        <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                    />
-                            </Search>
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} size="large" aria-label="show user menu" color="inherit">
-                                    <PersonIcon/>
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{ mt: '45px' }}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {/*profile dropdown options for when logged out*/}
-                                    <MenuItem key='amLoggedOut' onClick= {() => {handleCloseUserMenu('amLoggedOut')}}>
-                                        <Typography textAlign="center">You are not logged in. <br></br>
-                                        <a href='/login'>Sign In</a> to view your account.</Typography>
-                                    </MenuItem>
-                            </Menu>
-
-                                    <IconButton size="large" aria-label="show 4 items" color="inherit">
-                                        <Badge badgeContent={state.cart.length} color="secondary">
-                                            <CartIcon />
-                                        </Badge>
-                                    </IconButton>
-                                </Box>
-                    </Toolbar>
-                </Container>
-            </AppBar>
-            </ThemeProvider>
-        )
-        );
-    }
+    
 };
 export default Header;

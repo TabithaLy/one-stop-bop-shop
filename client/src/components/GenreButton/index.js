@@ -78,6 +78,9 @@ function GenreButton(props) {
               variant="button"
               color="inherit"
               sx={{
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                fontSize: 20,
                 position: 'relative',
                 p: 4,
                 pt: 2,
