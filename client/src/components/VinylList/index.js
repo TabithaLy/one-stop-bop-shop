@@ -7,6 +7,14 @@ import { QUERY_VINYLS } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 import { Box, Grid } from "@mui/material";
 
+const styling = {
+  container: {
+    backgroundColor: 'white',
+    padding: 5,
+    paddingRight: 2,
+  }
+}
+
 function VinylList() {
   const [state, dispatch] = useStoreContext();
 
@@ -47,38 +55,16 @@ function VinylList() {
         }
         return false});
   }
-
-  // return (
-  //   <div className="my-2">
-  //     <h2>Our Vinyls:</h2>
-  //     {state.vinyls.length ? (
-  //       <div className="flex-row">
-  //         {filterVinyls().map((vinyl) => (
-  //           <VinylItem
-  //             key={vinyl._id}
-  //             _id={vinyl._id}
-  //             image={vinyl.image}
-  //             title={vinyl.title}
-  //             artist={vinyl.artist}
-  //             price={vinyl.price}
-  //             quantity={vinyl.quantity}
-  //           />
-  //         ))}
-  //       </div>
-  //     ) : (
-  //       <h3>
-  //         Nothing to display. Please contact us to request specific products!{" "}
-  //       </h3>
-  //     )}
-  //   </div>
-  // );
-
   
   return (
+    <>
+    <div className="search-result">
+    <h2>Your Search Results:</h2>
+    </div>
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={{ xs:2, md:1 }} columns={{ xs: 4, sm: 8, md: 12}}>
+      <Grid sx={ styling.container } container spacing={2}>
         {filterVinyls().map((vinyl) => (
-          <Grid item xs={2} sm={4} md={4}>
+          <Grid sx={ styling.container } item xs={12} sm={6} md={3}>
             <VinylItem 
               key={vinyl._id}
               _id={vinyl._id}
@@ -92,6 +78,7 @@ function VinylList() {
         ))}
       </Grid>
     </Box>
+    </>
   )
 
 
