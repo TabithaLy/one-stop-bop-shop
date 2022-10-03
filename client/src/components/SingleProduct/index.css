@@ -1,0 +1,35 @@
+.wrapper {
+    padding: 50px;
+    display: flex;
+}
+
+.image-container {
+    flex: 1;
+}
+
+img {
+    width: 100%;
+    border: 2px solid black;
+}
+
+.info-container {
+    flex: 1;
+    padding: 0px 50px;
+}
+
+.title {
+    font-weight: 200;
+}
+
+.price {
+    font-weight: 100;
+    font-size: 40px;
+}
+
+.button {
+    padding: 15px;
+    border: 2px solid black;
+    background-color: #1D6E8C;
+    cursor: pointer;
+    font-weight: 500;
+}

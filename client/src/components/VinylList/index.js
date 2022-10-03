@@ -73,8 +73,7 @@ function VinylList() {
     return state.vinyls.filter((vinyl) => {
         for (let i=0; i<vinyl.genres.length; i++) {
             if (vinyl.genres[i]._id === currentGenre) {
-                console.log(vinyl.title)
-                return true
+                return true;
             }
         }
         return false});

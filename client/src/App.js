@@ -70,7 +70,7 @@ function App() {
                 element={<Signup />} 
               />
               <Route 
-                path="/records" 
+                path="/vinyls/:_id" 
                 element={<SingleProduct />} 
               />
               <Route
