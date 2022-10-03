@@ -45,7 +45,7 @@ const GenreCards = () => {
   };
 
   let displayGenres = [{genre: 'Rock', url: 'https://pbs.twimg.com/media/Fdtw-v-XgAES02U?format=jpg&name=large'},
-  {genre: 'Pop', url: 'https://www.gannett-cdn.com/presto/2018/10/29/USAT/e9bbcb74-2727-4aaa-a7f3-897a316a6a77-AP_Wicked_Anniversary.1.jpg'},
+  {genre: 'Pop', url: 'https://res.cloudinary.com/daheygjio/image/upload/v1664758535/albumcovers/10C7A57E-18F5-4FAB-87FB-DA25CD07AFA3_1_201_a_fee8fs.jpg'},
   {genre: 'Hip Hop', url: 'https://res.cloudinary.com/daheygjio/image/upload/v1664663346/albumcovers/B37FE2DA-1431-4651-A94A-2F70DFAF5D7B_1_201_a_ldgplz.jpg'},
   {genre: 'Country / Folk', url: 'https://res.cloudinary.com/daheygjio/image/upload/v1664665294/albumcovers/FCB82979-17BF-47A6-B910-9BF58435D653_1_201_a_b4r33a.jpg'}]
 

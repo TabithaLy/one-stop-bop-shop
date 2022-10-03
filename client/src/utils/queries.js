@@ -90,3 +90,20 @@ export const QUERY_ALL_VINYLS = gql`
     }
   }
 `;
+
+export const QUERY_BY_ID = gql`
+  query getVinyls($id: ID!) {
+    vinyl(id: $id) {
+        _id
+        title
+        artist
+        price
+        image
+        quantity
+        genres {
+            name
+            _id
+        }
+    }
+  }
+`;

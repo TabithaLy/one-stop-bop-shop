@@ -62,7 +62,7 @@ const resolvers = {
       const imgurl = new URL("https://res.cloudinary.com/daheygjio/image/upload/v1664415401/albumcovers/")
       const order = new Order({ vinyls: args.vinyls });
       const line_items = [];
-
+      console.log(order)
       const { vinyls } = await order.populate('vinyls');
 
       for (let i = 0; i < vinyls.length; i++) {
@@ -83,7 +83,7 @@ const resolvers = {
           quantity: 1
         });
       }
-
+      
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items,
